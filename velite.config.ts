@@ -1,24 +1,24 @@
 import { defineConfig, defineCollection, s } from "velite";
 
 // blog/hello-world
-const computedField = <T extends { slug: string }>(data: T) => ({
+const computedFields = <T extends { slug: string }>(data: T) => ({
   ...data,
   slugAsParams: data.slug.split("/").slice(1).join("/"),
 });
 
 const posts = defineCollection({
-  name: "Posts",
+  name: "Post",
   pattern: "blog/**/*.mdx",
   schema: s
     .object({
       slug: s.path(),
       title: s.string().max(99),
       description: s.string().max(999).optional(),
-      data: s.isodate(),
+      date: s.isodate(),
       published: s.boolean().default(true),
       body: s.mdx(),
     })
-    .transform(computedField),
+    .transform(computedFields),
 });
 
 export default defineConfig({
