@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import "./globals.css";
+import { SiteHeader } from "@/components/site-header";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -26,7 +27,10 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        {children}
+        <div className="relative flex min-h-dvh flex-col bg-background">
+          <SiteHeader />
+          <main className="flex-1">{children}</main>
+        </div>
       </body>
     </html>
   );
