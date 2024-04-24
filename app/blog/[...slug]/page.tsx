@@ -12,18 +12,18 @@ interface PostPageProps {
   };
 }
 
+// slug 가져와 제목과 맞는 글 찾음
 async function getPostFromPageParams(params: PostPageProps["params"]) {
   const slug = params?.slug?.join("/");
-  console.log("첫 렌더링시 불러옴", slug);
   const post = posts.find((post) => post.slugAsParams === slug);
-  console.log("post", post);
   return post;
 }
+
+// 메타데이터 생성
 export async function generateMetadata({
   params,
 }: PostPageProps): Promise<Metadata> {
   const post = await getPostFromPageParams(params);
-
   if (!post) {
     return {};
   }

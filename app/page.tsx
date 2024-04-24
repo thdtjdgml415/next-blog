@@ -7,6 +7,7 @@ import { PostItem } from "@/components/post-items";
 
 export default function Home() {
   const latestPosts = sortPosts(posts).slice(0, 5);
+
   return (
     <>
       <section className="space-y-6 pb-6 pt-6 md:pb-12 md:mt-10 lg:py-32">

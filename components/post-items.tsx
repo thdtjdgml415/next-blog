@@ -2,15 +2,23 @@ import { Calendar } from "lucide-react";
 import Link from "next/link";
 import { buttonVariants } from "./ui/button";
 import { cn, formatDate } from "@/lib/utils";
+import Image from "next/image";
 
 interface PostItemProps {
   slug: string;
   title: string;
   description?: string;
   date: string;
+  thumbnail?: string;
 }
 
-export function PostItem({ slug, title, description, date }: PostItemProps) {
+export function PostItem({
+  slug,
+  title,
+  description,
+  date,
+  thumbnail,
+}: PostItemProps) {
   return (
     <article className="flex flex-col gap-2 border-border border-b py-3 px-2 group hover:dark:bg-slate-100">
       <div>
@@ -19,6 +27,14 @@ export function PostItem({ slug, title, description, date }: PostItemProps) {
         </h2>
       </div>
       <div className="max-w-none text-muted-foreground">{description}</div>
+      {thumbnail ? (
+        <Image
+          src={`/static/${thumbnail}`}
+          alt="블로그 썸네일"
+          width={100}
+          height={100}
+        />
+      ) : null}
       <div className="flex justify-between items-center">
         <dl>
           <dt className="sr-only">Published On</dt>
