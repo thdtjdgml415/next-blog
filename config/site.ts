@@ -5,8 +5,8 @@ export const siteConfig = {
   author: "song",
   links: {
     github: "https://github.com/thdtjdgml415",
-    linkedIn: "",
-    personalSite: "",
+    linkedIn: "https://www.linkedin.com/feed/",
+    personalSite: "https://jamesshopland.com",
   },
 };
 export type SiteConfig = typeof siteConfig;
