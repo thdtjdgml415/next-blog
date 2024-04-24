@@ -7,7 +7,7 @@ export default {
     return config;
   },
   images: {
-    domains: ["plus.unsplash.com", "github.com"],
+    domains: ["plus.unsplash.com", "github.com", "raw.githubusercontent.com"],
   },
 };
 
