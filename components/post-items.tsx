@@ -28,12 +28,7 @@ export function PostItem({
       </div>
       <div className="max-w-none text-muted-foreground">{description}</div>
       {thumbnail ? (
-        <Image
-          src={`/static/${thumbnail}`}
-          alt="블로그 썸네일"
-          width={100}
-          height={100}
-        />
+        <Image src={thumbnail} alt="블로그 썸네일" width={100} height={100} />
       ) : null}
       <div className="flex justify-between items-center">
         <dl>

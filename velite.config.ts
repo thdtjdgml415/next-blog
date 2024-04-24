@@ -2,6 +2,8 @@ import { defineConfig, defineCollection, s, ZodMeta } from "velite";
 import rehypeSlug from "rehype-slug";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import { Image, Root } from "mdast";
+import { visit } from "unist-util-visit";
 
 interface ThumbnailType {
   local: any;
@@ -32,38 +34,44 @@ const posts = defineCollection({
     })
     .transform(computedFields)
     .transform(async (data, { meta }) => {
-      console.log("metac", meta);
-      // console.log("generateThumbnailURL.mdast", meta.mdast);
-
-      return { ...data, url: `${data.slug}.jpg` };
+      const thumbnailURL = await generateThumbnailURL(meta.mdast, data.slug);
+      return {
+        ...data,
+        url: `/blog/${data.slug}.jpg`,
+        thumbnail: { local: thumbnailURL },
+      };
     }),
 });
 
-// // 정확한 이미지 경로 생성
-// function extractImgSrc(mdast: Root | undefined): string[] {
-//   console.log("extractImgSrc", mdast);
-//   const images: string[] = [];
-//   if (!mdast) {
-//     console.log("No MDAST available");
-//     return images;
-//   }
-//   visit(mdast, "image", (node) => {
-//     images.push(node.url);
-//   });
-//   return images;
-// }
+// MDAST를 순회하면서 모든 이미지 뽑아내기
+function extractImgSrc(mdast: Root | undefined): string[] {
+  const images: string[] = [];
+  if (!mdast) {
+    console.log("No MDAST available");
+    return images;
+  }
+  visit(mdast, "image", (node: Image) => {
+    images.push(node.url);
+  });
+  return images;
+}
 
 // // 썸네일 직접 입력
 // function createThumbnail(filePath: string) {}
 
 // 썸네일 경로 생성
-export async function generateThumbnailURL(title: string, filePath: string) {
-  console.log(
-    "generateThumbnailURL",
-    title,
-    "generateThumbnailURL 1",
-    filePath
-  );
+export async function generateThumbnailURL(
+  mdast: Root | undefined,
+  filePath: string
+) {
+  const images = extractImgSrc(mdast);
+  console.log("retrun extractImgSrc", images);
+  if (images.length > 0) {
+    return images[0]; // 첫 번째 이미지 URL 반환
+  } else {
+    // 이미지가 없는 경우, 기본 썸네일 경로 또는 로직 제공
+    return undefined;
+  }
 }
 
 export default defineConfig({

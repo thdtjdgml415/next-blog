@@ -7,6 +7,9 @@ export default {
     config.plugins.push(new VeliteWebpackPlugin());
     return config;
   },
+  images: {
+    domains: ["plus.unsplash.com", "github.com"],
+  },
 };
 
 class VeliteWebpackPlugin {
