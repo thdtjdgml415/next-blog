@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: "Song blog",
-  url: "thdtjdgml415@gmail.com",
+  url: "https://example.com",
   description: "Next 14 blog using velite, tailwind, shadcn",
   author: "song",
   links: {
