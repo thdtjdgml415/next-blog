@@ -2,7 +2,7 @@ import type { Config } from "tailwindcss";
 const { fontFamily } = require("tailwindcss/defaultTheme");
 
 const config = {
-  darkMode: ["class"],
+  Mode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
@@ -23,6 +23,16 @@ const config = {
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },
       colors: {
+        ST_primary: "#0C0E22", // 메인 컬러
+        ST_accent: "#22d3ee", // 강조 컬러
+        ST_asist: "#ffffff", // 보조 컬러
+        ST_postive: "#9370DB", // 긍정 컬러
+        ST_negative: "#F28858", // 긍정 컬러
+        ST_disable: "#666666", // 비활성화
+        ST_grayHover1: "#dfe2ea20", // 호버색상
+        ST_placeHolder: "#707070", // placeholder
+        ST_white_opacity_10: "#ffffff1a", // 투명도
+
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
