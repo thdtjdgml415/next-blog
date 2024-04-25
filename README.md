@@ -1,6 +1,7 @@
 # 프로젝트 next-blog
 
-나만의 블로그를 가지고 싶다는 생각에 시작한 next.js, tailwind, velite를 사용해 만든 블로그 입니다.
+나만의 블로그를 가지고 싶다는 생각에 시작한 next.js, tailwind, velite, shadcn을 사용해 만든 블로그 입니다.
+꾸준히 업데이트 하고 있는 중 입니다.
 
 #### 개발환경
 
@@ -15,7 +16,6 @@
 #### 프로젝트 주요 경로
 
 - /app `page`, `layout` 등 View파일
-- /public `이미지`, `폰트` 등 Asset파일
 - /src `Redux`, `customHooks`, `components` 등 기능도구
 
 ```bash
@@ -23,24 +23,13 @@
 │   ├── about - 미구현
 │   ├── tags - 태그 페이지
 │   ├── blog - blog 글 관련 페이지
+│   ├── assets - 블로그 썸네일 및 나머지 이미지 와 폰트 관련 파일 입니다.
 │   └── api // og 이미지 생성용
-├── code
-│   └── public
-│       └── assets
-│           └──img // 정적인 이미지 파일
-└── src
-    ├── components
-    ├── ui - shadcn ui 컴포넌트 페이지
-    └── lib - 함수 관리
+├── components - 컴포넌트가 모여있는 폴더
+│   └── ui - shadcn ui 컴포넌트
+├── content - mdx 마크다운 글이 모여있는 파일
+└── lib - 함수 관리
 ```
-
-### 프로젝트 실행 방법
-
-```bash
-npm run dev
-```
-
--
 
 ### 프로젝트 실행 방법
 
