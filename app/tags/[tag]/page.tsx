@@ -1,4 +1,5 @@
 import {
+  decodeKoreanURI,
   getAllTags,
   getPostByTags,
   getPropsByTagProps,
@@ -21,28 +22,32 @@ export async function generateMetadata({
   params,
 }: TagPageProps): Promise<Metadata> {
   const { tag } = params;
+  const decodingTag = decodeKoreanURI(tag);
   return {
-    title: tag,
-    description: `Post on topic of ${tag}`,
+    title: decodingTag,
+    description: `Post on topic of ${decodingTag}`,
   };
 }
 
 export const generateStaticParams = () => {
   const tags = getAllTags(posts);
   const paths = Object.keys(tags).map((tag) => ({ tag: slug(tag) }));
+
   return paths;
 };
 
 export default function TagPage({ params }: TagPageProps) {
   const { tag } = params;
-  console.log("tag", tag);
-  const title = tag.split("-").join(" ");
+
+  const decodingTag = decodeKoreanURI(tag);
+  const title = decodingTag.split("-").join(" ").trim();
 
   const displayPosts = getPropsByTagProps(posts);
-  const matchTagPosts = getPostByTags(displayPosts, tag);
+  const matchTagPosts = getPostByTags(displayPosts, title);
 
   const tags = getAllTags(posts);
   const sortedTags = sortTagsByCount(tags);
+  console.log("sortedTags", sortedTags);
   return (
     <div className="container max-w-4xl py-6 lg:py-10">
       <div className="flex flex-col items-start gap-4 md:flex-row md:justify-between">

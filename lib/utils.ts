@@ -54,3 +54,18 @@ export function getPropsByTagProps(posts: Array<Post>) {
 export function getPostByTags(posts: Array<Post>, tag: string) {
   return posts.filter((post) => post.tags?.includes(tag));
 }
+
+// tag중 한글인 경우 디코딩
+export function decodeKoreanURI(encodedURI: string) {
+  // URL 인코딩된 문자열에서 한글 패턴을 찾기 위한 정규식
+  const koreanEncodedPattern = /(%[Ee][Dd].{4}|%[Ee][Cc].{4}|%[Ee][Bb].{4})+/g;
+
+  // 인코딩된 문자열에 한글이 포함되어 있는지 검사
+  if (koreanEncodedPattern.test(encodedURI)) {
+    // 한글이 포함된 부분을 디코딩
+    return decodeURIComponent(encodedURI);
+  } else {
+    // 한글이 포함되지 않은 경우 원본 문자열 반환
+    return encodedURI;
+  }
+}
