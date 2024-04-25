@@ -11,7 +11,7 @@ export function MainNav() {
   return (
     <nav className="flex items-center space-x-4 lg:space-x-6">
       <Link href="/" className="mr-6 flex items-center space-x-2">
-        <Icons.logo className="w-6 h-6" />
+        <Icons.LogoPng className="w-6 h-6" />
         <span className="font-bold">{siteConfig.name}</span>
       </Link>
       <Link

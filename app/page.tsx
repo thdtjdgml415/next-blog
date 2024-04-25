@@ -8,7 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function Home() {
   const latestPosts = sortPosts(posts).slice(0, 5);
-  console.log("home post data", latestPosts);
+
   return (
     <>
       <section className="container max-w-4xl pb-6 pt-6 md:pb-12 md:mt-10">
@@ -26,8 +26,8 @@ export default function Home() {
         </div>
       </section>
       <section className="container max-w-4xl py-6 lg:py-10 flex flex-col space-y-6">
-        <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-center">
-          Latest Posts
+        <h2 className="text-2xl sm:text-5xl md:text-6xl lg:text-3xl font-black text-left">
+          최근 작성한 글
         </h2>
         <ul className="flex flex-col">
           {latestPosts.map((post) => (
