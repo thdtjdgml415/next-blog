@@ -23,9 +23,11 @@ export async function generateMetadata({
 }: TagPageProps): Promise<Metadata> {
   const { tag } = params;
   const decodingTag = decodeKoreanURI(tag);
+  const title = decodingTag.split("-").join(" ").trim();
+  console.log(title);
   return {
-    title: decodingTag,
-    description: `Post on topic of ${decodingTag}`,
+    title: title,
+    description: `Post on topic of ${title}`,
   };
 }
 

@@ -52,7 +52,12 @@ export function getPropsByTagProps(posts: Array<Post>) {
 
 // 태그에 알맞은 게시글 가져오기
 export function getPostByTags(posts: Array<Post>, tag: string) {
-  return posts.filter((post) => post.tags?.includes(tag));
+  return posts.filter((post) => {
+    if (!post.tags) return false;
+    // 각 게시물의 태그를 슬러그화하고, 주어진 태그와 비교
+    const slugfiedTags = post.tags.map((tag) => slug(tag));
+    return slugfiedTags.includes(slug(tag)); // 주어진 태그를 포함하는지 확인
+  });
 }
 
 // tag중 한글인 경우 디코딩
