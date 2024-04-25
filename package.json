@@ -28,6 +28,7 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
+    "@mdx-js/react": "^3.0.1",
     "@tailwindcss/typography": "^0.5.12",
     "@types/mdast": "^4.0.3",
     "@types/node": "^20",

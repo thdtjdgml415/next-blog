@@ -27,7 +27,7 @@ export function PostItem({
       <div className="flex justify-between">
         <div>
           <h2 className="text-2xl font-bold  mb-2 group-hover:ml-5 group-hover:text-ST_postive group-hover:rotate-1 transition-all">
-            <Link href={slug}>{title}</Link>
+            <Link href={"/" + slug}>{title}</Link>
           </h2>
           <div className="flex justify-between items-center mb-1">
             <dl>

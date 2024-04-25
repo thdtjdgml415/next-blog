@@ -11,13 +11,6 @@ aside {
   border: 1px solid #000000;
 }
 
-strong {
-  box-sizing: border-box;
-  padding: 2px 5px;
-  color: #000000 !important;
-  font-weight: 900;
-}
-
 li > p {
   color: #000000 !important;
   font-weight: 600 !important;
