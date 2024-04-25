@@ -1,4 +1,9 @@
-import { getAllTags, getPropsByTagProps, sortTagsByCount } from "@/lib/utils";
+import {
+  getAllTags,
+  getPostByTags,
+  getPropsByTagProps,
+  sortTagsByCount,
+} from "@/lib/utils";
 import { posts } from "#site/content";
 import { PostItem } from "@/components/post-items";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -30,9 +35,12 @@ export const generateStaticParams = () => {
 
 export default function TagPage({ params }: TagPageProps) {
   const { tag } = params;
+  console.log("tag", tag);
   const title = tag.split("-").join(" ");
 
-  const displayPosts = getPropsByTagProps(posts, tag);
+  const displayPosts = getPropsByTagProps(posts);
+  const matchTagPosts = getPostByTags(displayPosts, tag);
+
   const tags = getAllTags(posts);
   const sortedTags = sortTagsByCount(tags);
   return (
@@ -49,7 +57,7 @@ export default function TagPage({ params }: TagPageProps) {
           <hr className="mt-8" />
           {displayPosts?.length > 0 ? (
             <ul className="flex flex-col">
-              {displayPosts.map((post) => {
+              {matchTagPosts.map((post) => {
                 const { slug, title, description, date, thumbnail, tags } =
                   post;
                 return (

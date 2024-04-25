@@ -18,7 +18,7 @@ const components = {
   ) => {
     console.log("strong tag props", props);
     return (
-      <strong className=" text-ST_primary dark:text-ST_accent" {...props} />
+      <strong className=" text-ST_primary dark:text-ST_postive" {...props} />
     );
   },
   th: (

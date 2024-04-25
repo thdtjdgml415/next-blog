@@ -1,10 +1,7 @@
-import { type ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
 import { Post } from "#site/content";
-import { unified } from "unified";
-import remarkParse from "remark-parse";
-import { Root } from "mdast";
+import { clsx, type ClassValue } from "clsx";
 import { slug } from "github-slugger";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -43,10 +40,17 @@ export function sortTagsByCount(tags: Record<string, number>) {
   return Object.keys(tags).sort((a, b) => tags[b] - tags[a]);
 }
 
-export function getPropsByTagProps(posts: Array<Post>, tag: string) {
+// 태그 생성
+export function getPropsByTagProps(posts: Array<Post>) {
   return posts.filter((post) => {
     if (!post.tags) return false;
     const slugfiedTags = post.tags.map((tag) => slug(tag));
+
     return slugfiedTags;
   });
+}
+
+// 태그에 알맞은 게시글 가져오기
+export function getPostByTags(posts: Array<Post>, tag: string) {
+  return posts.filter((post) => post.tags?.includes(tag));
 }
