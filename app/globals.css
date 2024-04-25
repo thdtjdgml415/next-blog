@@ -11,11 +11,6 @@ aside {
   border: 1px solid #000000;
 }
 
-li > p {
-  color: #000000 !important;
-  font-weight: 600 !important;
-}
-
 thead tr th {
   background: #cccccc;
   text-align: center;

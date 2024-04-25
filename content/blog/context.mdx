@@ -78,7 +78,7 @@ ECMAScript 사양은 소스코드를 4가지 타입으로 구분하는데 이는
 
 값이 변경된 변수나 소스코드의 실행결과는 다시 실행 컨텍스트가 관리하는 스코프에 등록된다.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/12657389-0f9c-46b5-bb62-6f11ae228c69/43abf473-ec8d-4421-817a-c74f66a97ec0/Untitled.png)
+![실행 컨텍스트 이미지](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/context1.webp)
 
 예를 들자면
 
@@ -91,7 +91,7 @@ x = 1;
 
 실행 과정에서는 변수 할당문 **x = 1;** 만 실행된다. 이때 **x** 변수에 값을 할당하려면 먼저 **x** 변수가 선언된 변수인지 확인해야 하는데 이를 위해 **실행 컨텍스트**가 관리하는 스코프에 **x** 변수가 선언 되어있는지 확인하고 선언 되어있다면 값을 할당하고 할당 결과를 `실행 컨텍스트`에 등록하여 관리한다.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/12657389-0f9c-46b5-bb62-6f11ae228c69/4d88a64d-7ca9-49bb-b0ec-5661a96fcf7b/Untitled.png)
+![실행 컨텍스트 이미지](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/context2.webp)
 
 ## 실행 컨텍스트의 역할
 
@@ -146,7 +146,7 @@ console.log(x + y);
 
 ---
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/12657389-0f9c-46b5-bb62-6f11ae228c69/062b9ca9-f843-4f0d-bae6-0dc368d4ec66/Untitled.png)
+![실행 컨텍스트 이미지](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/context3.webp)
 
 [출처: 모던 자바스크립트]
 
