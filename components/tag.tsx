@@ -1,19 +1,22 @@
-import React from "react";
-import { v4 as uuidv4 } from "uuid";
+import { slug } from "github-slugger";
+import Link from "next/link";
+import { badgeVariants } from "./ui/badge";
 
-export function Tag({ tag }: { tag: string[] }) {
+interface TagProps {
+  tag: string;
+  current?: boolean;
+  count?: number;
+}
+export function Tag({ tag, current, count }: TagProps) {
   return (
-    <div className="flex gap-2">
-      {tag.map((el) => {
-        return (
-          <span
-            key={uuidv4()}
-            className="font-normal text-xs space-x-1 border-solid border-2 rounded-xl px-2 py-1 bg-background text-muted-foreground"
-          >
-            {el}
-          </span>
-        );
+    <Link
+      className={badgeVariants({
+        variant: current ? "default" : "secondary",
+        className: "no-underline rounded-md",
       })}
-    </div>
+      href={`/tags/${slug(tag)}`}
+    >
+      {tag}
+    </Link>
   );
 }

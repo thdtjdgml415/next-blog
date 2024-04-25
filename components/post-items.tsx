@@ -11,7 +11,7 @@ interface PostItemProps {
   description?: string;
   date: string;
   thumbnail?: string;
-  tag?: string[];
+  tags?: Array<string>;
 }
 
 export function PostItem({
@@ -20,7 +20,7 @@ export function PostItem({
   description,
   date,
   thumbnail,
-  tag,
+  tags,
 }: PostItemProps) {
   return (
     <article className="flex flex-col gap-2 border-border border-b py-3 px-2 group">
@@ -51,7 +51,11 @@ export function PostItem({
           />
         ) : null}
       </div>
-      {tag ? <Tag tag={tag} /> : null}
+      <div className="flex gap-2">
+        {tags?.map((tag) => {
+          return <Tag tag={tag} key={tag} />;
+        })}
+      </div>
     </article>
   );
 }

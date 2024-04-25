@@ -53,7 +53,7 @@ export default function Home() {
                 description={post.description}
                 date={post.date}
                 thumbnail={post.thumbnail.local}
-                tag={post.tags}
+                tags={post.tags}
               />
             </li>
           ))}

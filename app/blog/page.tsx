@@ -47,7 +47,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                   description={description}
                   date={date}
                   thumbnail={thumbnail.local}
-                  tag={tags}
+                  tags={tags}
                 />
               </li>
             );
