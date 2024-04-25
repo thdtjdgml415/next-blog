@@ -5,10 +5,6 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { Image, Root } from "mdast";
 import { visit } from "unist-util-visit";
 
-interface ThumbnailType {
-  local: any;
-}
-
 // blog/hello-world
 const computedFields = <T extends { slug: string }>(data: T) => ({
   ...data,
@@ -24,6 +20,7 @@ const posts = defineCollection({
       title: s.string().max(99),
       description: s.string().max(999).optional(),
       date: s.isodate(),
+      tags: s.array(s.string()).optional(),
       published: s.boolean().default(true),
       thumbnail: s
         .object({
@@ -34,7 +31,7 @@ const posts = defineCollection({
     })
     .transform(computedFields)
     .transform(async (data, { meta }) => {
-      const thumbnailURL = await generateThumbnailURL(meta.mdast, data.slug);
+      const thumbnailURL = await generateThumbnailURL(meta.mdast);
       return {
         ...data,
         url: `/blog/${data.slug}.jpg`,
@@ -56,16 +53,10 @@ function extractImgSrc(mdast: Root | undefined): string[] {
   return images;
 }
 
-// // 썸네일 직접 입력
-// function createThumbnail(filePath: string) {}
-
 // 썸네일 경로 생성
-export async function generateThumbnailURL(
-  mdast: Root | undefined,
-  filePath: string
-) {
+export async function generateThumbnailURL(mdast: Root | undefined) {
   const images = extractImgSrc(mdast);
-  console.log("retrun extractImgSrc", images);
+
   if (images.length > 0) {
     return images[0]; // 첫 번째 이미지 URL 반환
   } else {

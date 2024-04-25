@@ -25,7 +25,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
     POSTS_PER_PAGE * (currentPage - 1),
     POSTS_PER_PAGE * currentPage
   );
-  console.log("displayPosts", displayPosts);
+
   return (
     <div className="container max-w-4xl py-6 lg:py-10">
       <div className="flex flex-col items-start gap-4 md:flex-row md:justify-between">
@@ -38,7 +38,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
       {displayPosts?.length > 0 ? (
         <ul className="flex flex-col">
           {displayPosts.map((post) => {
-            const { slug, title, description, date, thumbnail } = post;
+            const { slug, title, description, date, thumbnail, tags } = post;
             return (
               <li key={slug}>
                 <PostItem
@@ -47,6 +47,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                   description={description}
                   date={date}
                   thumbnail={thumbnail.local}
+                  tag={tags}
                 />
               </li>
             );

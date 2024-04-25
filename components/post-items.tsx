@@ -3,6 +3,7 @@ import Link from "next/link";
 import { buttonVariants } from "./ui/button";
 import { cn, formatDate } from "@/lib/utils";
 import Image from "next/image";
+import { Tag } from "./tag";
 
 interface PostItemProps {
   slug: string;
@@ -10,6 +11,7 @@ interface PostItemProps {
   description?: string;
   date: string;
   thumbnail?: string;
+  tag?: string[];
 }
 
 export function PostItem({
@@ -18,30 +20,38 @@ export function PostItem({
   description,
   date,
   thumbnail,
+  tag,
 }: PostItemProps) {
   return (
-    <article className="flex flex-col gap-2 border-border border-b py-3 px-2 group hover:dark:bg-slate-100">
-      <div>
-        <h2 className="text-2xl font-bold  group-hover:ml-5 group-hover:text-ST_postive group-hover:rotate-1 transition-all">
-          <Link href={slug}>{title}</Link>
-        </h2>
+    <article className="flex flex-col gap-2 border-border border-b py-3 px-2 group">
+      <div className="flex justify-between">
+        <div>
+          <h2 className="text-2xl font-bold  mb-2 group-hover:ml-5 group-hover:text-ST_postive group-hover:rotate-1 transition-all">
+            <Link href={slug}>{title}</Link>
+          </h2>
+          <div className="flex justify-between items-center mb-1">
+            <dl>
+              <dt className="sr-only">Published On</dt>
+              <dd className="text-xs sm:text-base font-medium flex items-center gap-1">
+                <Calendar className="h-4 w-4" />
+                <time dateTime="date">{formatDate(date)}</time>
+              </dd>
+            </dl>
+          </div>
+
+          <div className="max-w-none text-muted-foreground">{description}</div>
+        </div>
+        {thumbnail ? (
+          <Image
+            src={thumbnail}
+            alt="블로그 썸네일"
+            width={100}
+            height={100}
+            sizes="fill"
+          />
+        ) : null}
       </div>
-      <div className="max-w-none text-muted-foreground">{description}</div>
-      {thumbnail ? (
-        <Image src={thumbnail} alt="블로그 썸네일" width={100} height={100} />
-      ) : null}
-      <div className="flex justify-between items-center">
-        <dl>
-          <dt className="sr-only">Published On</dt>
-          <dd className="text-sm sm:text-base font-medium flex items-center gap-1">
-            <Calendar className="h-4 w-4" />
-            <time dateTime="date">{formatDate(date)}</time>
-          </dd>
-        </dl>
-        <Link href={slug} className={cn(buttonVariants({ variant: "link" }))}>
-          Read More ☌
-        </Link>
-      </div>
+      {tag ? <Tag tag={tag} /> : null}
     </article>
   );
 }
