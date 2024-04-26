@@ -7,6 +7,7 @@ import Link from "next/link";
 import { buttonVariants } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
+
 export function MainInto() {
   return (
     <div className="flex">
@@ -18,8 +19,8 @@ export function MainInto() {
         className="w-0 lg:w-auto"
       />
 
-      <div className="container flex flex-col gap-4 text-center min-w-[486px]">
-        <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-balance z-10">
+      <div className="container flex flex-col gap-4 text-center">
+        <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-balance">
           Hello I&apos;m Song
         </h1>
         <p className="max-w-[42rem] mx-auto text-muted-foreground sm:text-xl text-balance">
