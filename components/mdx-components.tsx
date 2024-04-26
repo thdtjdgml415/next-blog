@@ -16,7 +16,6 @@ const components = {
       ClassAttributes<HTMLElement> &
       HTMLAttributes<HTMLElement>
   ) => {
-    console.log("strong tag props", props);
     return (
       <strong className=" text-ST_primary dark:text-ST_postive" {...props} />
     );

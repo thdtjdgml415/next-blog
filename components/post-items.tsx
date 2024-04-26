@@ -47,7 +47,7 @@ export function PostItem({
             alt="블로그 썸네일"
             width={100}
             height={100}
-            sizes="fill"
+            className="object-contain"
           />
         ) : null}
       </div>
