@@ -16,17 +16,19 @@
 #### 프로젝트 주요 경로
 
 - /app `page`, `layout` 등 View파일
-- /src `Redux`, `customHooks`, `components` 등 기능도구
+- /components 컴포넌트들이 보관되어 있는 폴더 입니다. 또한 ui 폴더에 shadcn 컴포넌트가 모여있습니다.
 
 ```bash
 ├── app
-│   ├── about - 미구현
+│   ├── about - 소개 페이지
 │   ├── tags - 태그 페이지
 │   ├── blog - blog 글 관련 페이지
 │   ├── assets - 블로그 썸네일 및 나머지 이미지 와 폰트 관련 파일 입니다.
 │   └── api // og 이미지 생성용
+│
 ├── components - 컴포넌트가 모여있는 폴더
 │   └── ui - shadcn ui 컴포넌트
+│
 ├── content - mdx 마크다운 글이 모여있는 파일
 └── lib - 함수 관리
 ```
