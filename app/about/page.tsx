@@ -22,8 +22,9 @@ export default async function AboutPage() {
         <div className="min-w-48 max-w-48 flex flex-col gap-2">
           <Avatar className="w-48 h-48">
             <AvatarImage
-              src="../../assets/img/aboutImage.jpg"
+              src="https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/aboutImage.webp"
               alt={siteConfig.author}
+              className="object-cover"
             />
             <AvatarFallback>song</AvatarFallback>
           </Avatar>
