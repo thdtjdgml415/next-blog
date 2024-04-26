@@ -22,7 +22,10 @@ export default function Home() {
               {siteConfig.author}
             </h2>
           </div>
-          <p className="text-muted-foreground text-sm py-4">자기소개 부분</p>
+          <p className="text-black text-lg py-4">
+            유쾌한 삶을 살아가며 대단하진 않지만 누군가에게 도움이 되는 삶을
+            살아가고 싶습니다.
+          </p>
         </div>
       </section>
       <section className="container max-w-4xl py-6 lg:py-10 flex flex-col space-y-6">

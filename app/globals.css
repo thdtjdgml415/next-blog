@@ -11,6 +11,7 @@ aside {
   border: 1px solid #000000;
 }
 
+/* markdown 스타일링 */
 thead tr th {
   background: #cccccc;
   text-align: center;
@@ -25,6 +26,22 @@ tbody tr td:first-child {
 tbody tr td {
   border: 1px solid #000000;
 }
+
+code {
+  background: #cccccc;
+  border: 1px solid #ababab;
+  padding: 1px 2px;
+  border-radius: 5px;
+  color: #f54364 !important;
+}
+
+code::after {
+  display: none;
+}
+code::before {
+  display: none;
+}
+/*  */
 
 @layer base {
   :root {
@@ -104,13 +121,32 @@ tbody tr td {
 }
 
 /*  아이콘 */
+
+[class^="hex-logo"] {
+  display: inline-block;
+  transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  -webkit-transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+[class^="hex-logo"]:hover {
+  transform: scale3d(1.2, 1.2, 1);
+  -webkit-transform: scale3d(1.2, 1.2, 1);
+  transition: all 0.35s cubic-bezier(0, 1.27, 0.46, 1.65);
+  -webkit-transition: all 0.35s cubic-bezier(0, 1.27, 0.46, 1.65);
+}
+[class^="hex-logo"] svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 [class^="hex-icon"] {
-  width: 42px;
+  width: 50px;
   height: 50px;
   display: inline-block;
   transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
   -webkit-transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
+/*  mode 용 icon */
 [class^="hex-icon"]:hover {
   transform: scale3d(1.2, 1.2, 1);
   -webkit-transform: scale3d(1.2, 1.2, 1);
