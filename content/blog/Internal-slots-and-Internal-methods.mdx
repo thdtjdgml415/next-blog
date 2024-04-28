@@ -1,0 +1,284 @@
+---
+title: 프로퍼티 어트리뷰트
+description: 내부 슬롯과 내부 메서드 처음 들어보는 개념..?
+date: 2024-04-28
+tags: [javascript, mordern, 내부슬롯, 내부메서드, internalSlot, internalMethod]
+published: true
+---
+
+![프로퍼티 어트리뷰트 썸네일](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/Internal-slots-and-Internal-methods.webp)
+
+# 1. 프로퍼티 어트리뷰트
+
+## 1.1 내부 슬롯과 내부 메서드
+
+---
+
+내부 슬롯과 내부 메서드는 ECMAScript 사양에서 자바스크립트 엔진의 구현 알고리즘을 설명 하기위해 사용하는 `의사 프로퍼티`와 `의사 메서드`다. 이중 대괄호([[…]])로 감싼 이름들이다.
+
+하지만 내부 슬롯과 내부 메서드는 자바스크립트 엔진의 내부 로직이기 때문에 접근을 허용하지 않는다.
+
+## 1.2 프로퍼티 어트리뷰트와 프로퍼티 디스크립터 객체
+
+---
+
+**자바스크립트 엔진은 프로퍼티를 생성할 때 프로퍼티의 상태를 나타내는 프로퍼티 어트리뷰트를 기본값으로 정의한다.**
+
+### 1.2.1 프로퍼티 상태란
+
+- 프로퍼티의 값 : `[[**Value**]]`
+- 값의 갱신 여부 : `[[**Writable**]]`
+- 열거 가능 여부 : `[[**Enumerable**]]`
+- 재정의 가능 여부 : `[[**Configurable**]]`
+
+**`Object.getOwnPropertyDescriptor` 메서드를 활용해 간접적 확인할 수 있다.**
+
+**`Object.getOwnPropertyDescriptors` 하나의 프로퍼티에 대해 모든 프로퍼티 어트리뷰트의 속성을 객체로 반환함**
+
+```jsx
+const person = {
+  name: "Lee",
+};
+// 프로퍼티 어트리뷰트 정보를 제공하는 프로퍼티 어트리뷰트 객체를 제공
+Object.getOwnPropertyDescriptor(person);
+// {value: "Lee", writable: true, enumerable true, configurable: true}
+
+person.age = 20;
+
+//
+Object.getOwnPropertyDescriptors(person);
+// {value: "Lee", writable: true, enumerable true, configurable: true}
+// {value: 20, writable: true, enumerable true, configurable: true}
+```
+
+### 1.2.2 데이터 프로퍼티와 접근자 프로퍼티
+
+---
+
+- `데이터 프로퍼티` : 키와 값으로 구성된 일반적인 프로퍼티다.
+- `접근자 프로퍼티` : 자체적으로는 값을 갖지 않고 다른 데이터 프로퍼티의 값을 읽거나 저장할 때 호출되는 접근자 함수로 구성된 프로퍼티다.
+
+### 1.2.3 데이터 프로퍼티
+
+| 내부 속성 (Internal Attribute) | 기호             | 설명                                                                                                                     |
+| ------------------------------ | ---------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| 값 (Value)                     | [[Value]]        | 프로퍼티의 실제 데이터 값을 저장합니다. 기본값은 undefined입니다.                                                        |
+| 쓰기 가능 (Writable)           | [[Writable]]     | 프로퍼티의 값을 변경할 수 있는지 여부를 결정합니다. true이면 값을 변경할 수 있습니다.                                    |
+| 열거 가능 (Enumerable)         | [[Enumerable]]   | 프로퍼티가 for-in 루프 등에 의해 열거될 수 있는지 여부를 결정합니다. true이면 열거할 수 있습니다.                        |
+| 구성 가능 (Configurable)       | [[Configurable]] | 프로퍼티의 삭제나 속성 변경이 가능한지 여부를 결정합니다. true이면 프로퍼티를 삭제하거나 내부 속성을 변경할 수 있습니다. |
+
+객체 리터럴을 사용하여 데이터 프로퍼티를 정의할 때, 기본적으로 **`[[Writable]]`**, **`[[Enumerable]]`**, **`[[Configurable]]`** 속성들은 모두 **`true`**로 설정됩니다.
+
+```jsx
+let person = {
+  name: "John",
+};
+```
+
+이 경우, **`person`** 객체의 **`name`** 프로퍼티는 쓰기 가능, 열거 가능, 구성 가능한 상태로 생성된다. 하지만, **`Object.defineProperty`** 메서드를 사용하면 이러한 내부 속성들을 명시적으로 설정할 수 있다..
+
+```jsx
+Object.defineProperty(person, "age", {
+  value: 30,
+  writable: false,
+  enumerable: true,
+  configurable: false,
+});
+```
+
+이렇게 정의된 **`age`** 프로퍼티는 값이 **`30`**으로 설정되며, 이후에는 쓰기가 불가능(**`[[Writable]]: false`**), 열거는 가능(**`[[Enumerable]]: true`**), 구성 변경 또는 삭제는 불가능(**`[[Configurable]]: false`**)하다.
+
+### 1.2.4 접근자 프로퍼티
+
+**접근자 프로퍼티는 자체적으로 값을 갖지 않고 다른 데이터 프로퍼티의 값을 읽거나 저장할 때 사용하는 접근자 함수로 구성된 프로퍼티다.**
+
+| 내부 속성 (Internal Attribute) | 기호             | 설명                                                                                                                     |
+| ------------------------------ | ---------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Getter                         | [[Get]]          | 프로퍼티의 값을 읽으려고 할 때 호출되는 함수입니다. 기본값은 undefined입니다.                                            |
+| Setter                         | [[Set]]          | 프로퍼티에 값을 할당하려고 할 때 호출되는 함수입니다. 기본값은 undefined입니다.                                          |
+| 열거 가능 (Enumerable)         | [[Enumerable]]   | 프로퍼티가 for-in 루프 등에 의해 열거될 수 있는지 여부를 결정합니다. true이면 열거할 수 있습니다.                        |
+| 구성 가능 (Configurable)       | [[Configurable]] | 프로퍼티의 삭제나 속성 변경이 가능한지 여부를 결정합니다. true이면 프로퍼티를 삭제하거나 내부 속성을 변경할 수 있습니다. |
+
+```jsx
+const person = {
+  firstName: "Song",
+  lastName: "JB",
+
+  // fullName은 접근자 함수로 구성된 접근자 프로퍼티다.
+  // getter
+  get fullName() {
+    return `${this.firstName} ${this.lastName}`;
+  },
+  // setter
+  set fullName(name) {
+    [this.firstName, this.lastName] = name.split(" ");
+  },
+};
+
+// 데이터 프로퍼티를 통한 프로퍼티 값 참조
+console.log(person.firstName + " " + person.lastName);
+
+// 접근자 프로퍼티를 통한 프로퍼티 값의 저장
+// 접근자 프로퍼티 fullName에 값을 저장하면 setter함수 호출
+person.fullName = "Sung Hee";
+console.log(person); // firstName: "Sung", lastName: "Hee"}
+
+// 접근자 프로퍼티를 통한 프로퍼티 값의 참조
+// 접근자 프로퍼티 fullName에 접근하면 getter 함수가 호출된다.
+console.log("getter", person.fullName); // Sung Hee
+
+// firstName은 데이터 프로퍼티다.
+// 데이터 프로퍼티는 [[Value]], [[Writable]], [[Enumerable]], [[Configurable]]
+let descriptor = Object.getOwnPropertyDescriptor(person, "firstName");
+console.log("descriptor", descriptor); // descriptor { value: 'Sung', writable: true, enumerable: true, configurable: true }
+
+// fullName은 접근자 프로퍼티다.
+// descriptor { get: [Function: get fullName], set: [Function: set fullName] enumerable: true, configurable: true
+descriptor = Object.getOwnPropertyDescriptor(person, "fullName");
+console.log("descriptor", descriptor);
+/**
+ * descriptor {
+   get: [Function: get fullName],
+   set: [Function: set fullName],
+   enumerable: true,
+   configurable: true
+  }
+ */
+```
+
+`접근자 프로퍼티`로 프로퍼티 값에 접근하면 내부적으로 [[Get]] 내부 메서드가 호출되고 다음과 같이 동작한다.
+
+1. **프로퍼티 키**가 유효한지 확인한다.
+2. **프로토타입 체인**에서 **프로퍼티**를 검색한다.
+3. **검색된 프로퍼티가** 데이터 **프로퍼티인지 접근자 프로퍼티인지 확인**한다.
+4. `접근자 프로퍼티`의 **프로퍼티 어트리뷰트 [[Get]]의 값,** 즉 **getter 함수**를 호출하여 결과를 반환한다.
+
+- **프로토 타입이란?**
+
+  프로토타입은 어떤 객체의 상위 객체의 역할을 하는 객체다. 프로토타입은 하위 객체에게 자신의 프로퍼티와 메서드를 상속한다. 프로토타입 객체의 프로퍼티나 메서드를 상속받은 하위 객체는 자신의 프로퍼티 또는 메서드인 것 처럼 자유롭게 사용할 수 있다.
+
+  프로토타입 체인은 프로토타입이 단방향 링크드 리스트 형태로 연결되어 있는 상속 구조를 말한다. 객체의 프로퍼티나 메서드에 접근하려고 할 때 해당 객체에 접근하려는 프로퍼티 또는 메서드가 없다면 프로토타입 체인에 따라 프로토타입의 프로퍼티나 메서드를 차례대로 검색한다.
+
+  ## 1.3 프로토타입 상속 예시
+
+  다음은 간단한 프로토타입 상속의 예시입니다.
+
+  ```jsx
+  // 부모 객체
+  const animal = {
+    hasLife: true,
+    breathe() {
+      console.log("Breathing...");
+    },
+  };
+
+  // 자식 객체
+  const dog = Object.create(animal); // animal 객체를 프로토타입으로 하는 dog 객체 생성
+  dog.bark = function () {
+    console.log("Woof!");
+  };
+
+  dog.breathe(); // 상속받은 메소드 호출: "Breathing..."
+  dog.bark(); // 자신의 메소드 호출: "Woof!"
+  ```
+
+  이 예시에서 `animal` 객체는 `breathe` 메소드를 가지고 있으며, `dog` 객체는 `Object.create`를 통해 `animal` 객체를 자신의 프로토타입으로 설정합니다. 이로 인해 `dog` 객체는 `animal`의 메소드인 `breathe`를 상속받아 사용할 수 있게 됩니다. 또한, `dog` 객체는 자신만의 `bark` 메소드를 추가로 정의할 수 있습니다.
+
+  ### 1.3.1 생성자 함수와 프로토타입
+
+  자바스크립트에서 생성자 함수를 사용하면, 이 생성자를 통해 생성된 모든 객체가 공유할 수 있는 프로토타입 객체를 정의할 수 있습니다. 이를 통해 메모리를 효율적으로 사용하면서 메소드를 공유할 수 있습니다.
+
+  ```jsx
+  function Animal(name) {
+    this.name = name;
+  }
+
+  Animal.prototype.eat = function () {
+    console.log(`${this.name} is eating.`);
+  };
+
+  const rabbit = new Animal("Rabbit");
+  rabbit.eat(); // "Rabbit is eating."
+  ```
+
+  여기서 **Animal** 생성자 함수는 모든 **Animal** 인스턴스에 공통으로 사용될 **eat** 메소드를 **Animal.prototype**에 정의합니다. 이후 **new Animal("Rabbit")**을 통해 생성된 **rabbit** 객체는 **Animal**의 프로토타입인 **eat** 메소드를 상속받아 사용할 수 있게 됩니다.
+
+## 1.4 프로퍼티 정의 (**`Object.defineProperty`**)
+
+---
+
+**`Object.defineProperty` 메서드를 사용해 프로퍼티 어트리뷰트를 선언할 수 있다.**
+
+형태를 지정하지 않으면 기본 값이 `**false**` 다.
+
+| 프로퍼티 특성            | 기호             | 기본 값   | 설명                                                                                                                     |
+| ------------------------ | ---------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
+| 값 (Value)               | [[Value]]        | undefined | 프로퍼티에 할당된 값입니다.                                                                                              |
+| 쓰기 가능 (Writable)     | [[Writable]]     | false     | 프로퍼티의 값을 변경할 수 있는지 여부를 결정합니다. true면 값을 변경할 수 있습니다.                                      |
+| 열거 가능 (Enumerable)   | [[Enumerable]]   | false     | 프로퍼티가 for...in 루프나 Object.keys() 메서드 등에 의해 열거될 수 있는지 여부를 결정합니다. true면 열거할 수 있습니다. |
+| 구성 가능 (Configurable) | [[Configurable]] | false     | 프로퍼티를 삭제하거나 프로퍼티의 어트리뷰트를 변경할 수 있는지 여부를 결정합니다. true면 변경할 수 있습니다.             |
+| Get (Getter 함수)        | [[Get]]          | undefined | 프로퍼티의 값을 읽으려고 할 때 호출되는 함수입니다. 정의되지 않았으면 값을 읽을 수 없습니다.                             |
+| Set (Setter 함수)        | [[Set]]          | undefined | 프로퍼티에 값을 할당하려고 할 때 호출되는 함수입니다. 정의되지 않았으면 값을 쓸 수 없습니다.                             |
+
+**예시**
+
+```jsx
+const person = {};
+
+// 데이터 프로퍼티의 정의
+Object.defineProperty(person, "firstName", {
+  value: "Song",
+  writable: true,
+  enumerable: true,
+  configurable: true,
+});
+Object.defineProperty(person, "lastName", {
+  value: "Hee",
+  //..
+});
+
+let descriptor = Object.getOwnPropertyDescriptor(person, "firstName");
+console.log("firstName", descriptor); // firstName { value: 'Song', writable: true, enumerable: true, configurable: true }
+
+descriptor = Object.getOwnPropertyDescriptor(person, "lastName");
+console.log("lastName", descriptor); // lastName { value: 'Hee', writable: false, enumerable: false, configurable: false }
+```
+
+## 1.5 객체 변경 방지
+
+---
+
+| 메서드                     | 프로퍼티 추가 | 프로퍼티 삭제 | 값 읽기 | 값 쓰기 | 어트리뷰트 재정의 | 구분           |
+| -------------------------- | ------------- | ------------- | ------- | ------- | ----------------- | -------------- |
+| Object.preventExtensions() | ❌            | ✅            | ✅      | ✅      | ✅                | 객체 확장 금지 |
+| Object.seal()              | ❌            | ❌            | ✅      | ✅      | ❌                | 객체 밀봉      |
+| Object.freeze()            | ❌            | ❌            | ✅      | ❌      | ❌                | 객체 동결      |
+
+### 1.5.1 불변 객체
+
+객체 변경 방지 메서드는 **`얉은 변경 방지`**로 직속 프로퍼티만 변경이 방지되고 **`중첩 객체`**까지 영향을 주지 못한다. 따라서 다양한 방식으로 **중첩 객체까지 동결하려는 방법이 있는데 그중 하나의 방법으로는 재귀적으로 freeze() 메서드를 호출하는 것이다.**
+
+```jsx
+function deepFreeze(target) {
+  // 객체가 아니거나 동결된 객체는 무시하고 동결되지 않은 객체만 동결
+  if (target && typeof target === "object" && !Object.isFrozen(target)) {
+    Object.freeze(target);
+    Object.keys(target).forEach((key) => deepFreeze(target[key]));
+  }
+  return target;
+}
+const person = {
+  name: "Lee",
+  address: {
+    city: "seoul",
+    contury: "korea",
+    number: { one: 1, two: 2, three: 3 },
+  },
+};
+deepFreeze(person);
+console.log(Object.isFrozen(person)); // true
+console.log(Object.isFrozen(person.address)); // true
+console.log(Object.isFrozen(person.address.number)); // true
+
+person.address.city = "Busan"; // Cannot assign to read only property 'city' of object '#<Object>'
+```
