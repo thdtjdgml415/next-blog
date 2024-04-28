@@ -66,7 +66,6 @@ export async function generateStaticParams(): Promise<
 
 export default async function PostPage({ params }: PostPageProps) {
   const post = await getPostFromPageParams(params);
-
   if (!post || !post.published) {
     notFound();
   }
@@ -81,6 +80,27 @@ export default async function PostPage({ params }: PostPageProps) {
       {post.description ? (
         <p className="text-xl mt-0 text-muted-foreground">{post.description}</p>
       ) : null}
+      <ul className="p-0">
+        {post.headingTree.map((tree) => {
+          return (
+            <li key={tree.value} className="list-none">
+              <a
+                href={`#${tree.modifyValue}`}
+                className={`${
+                  tree.depth === 1
+                    ? "ml-0"
+                    : tree.depth === 2
+                    ? "ml-5"
+                    : "ml-10"
+                } mb-1`}
+              >
+                {tree.value}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+
       <hr className="my-4" />
       <MDXcomponent code={post.body} />
     </article>

@@ -4,6 +4,7 @@ import rehypePrettyCode from "rehype-pretty-code";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { Image, Root } from "mdast";
 import { visit } from "unist-util-visit";
+import { generateTableOfContents } from "./lib/toc";
 
 // blog/hello-world
 const computedFields = <T extends { slug: string }>(data: T) => ({
@@ -27,11 +28,16 @@ const posts = defineCollection({
           local: s.string(),
         })
         .optional(),
+      headingTree: s.custom().transform((data, { meta }) => {
+        if (!meta.mdast) return [];
+        return generateTableOfContents(meta.mdast);
+      }),
       body: s.mdx(),
     })
     .transform(computedFields)
     .transform(async (data, { meta }) => {
       const thumbnailURL = await generateThumbnailURL(meta.mdast);
+
       return {
         ...data,
         url: `/blog/${data.slug}.jpg`,
