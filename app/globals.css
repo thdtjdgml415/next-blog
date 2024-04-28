@@ -12,6 +12,11 @@ aside {
 }
 
 /* markdown 스타일링 */
+
+a {
+  text-decoration: none !important;
+}
+
 thead tr th {
   background: #cccccc;
   text-align: center;

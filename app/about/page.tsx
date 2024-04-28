@@ -1,13 +1,16 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { siteConfig } from "@/config/site";
 import { Metadata } from "next";
-import aboutImage from "../../assets/img/aboutImage.jpg";
+import MDXcomponent from "@/components/mdx-components";
+import { posts } from "#site/content";
+
 export const metadata: Metadata = {
   title: "About me",
-  description: "Information abot me",
+  description: "Information about me",
 };
 
 export default async function AboutPage() {
+  const aboutPosts = posts.filter((post) => post.tags?.includes("about"));
   return (
     <div className="container max-w-6xl py-6 lg:py-10">
       <div className="flex flex-col item-start gap-4 md:flex-row md:justify-between">
@@ -66,6 +69,14 @@ export default async function AboutPage() {
           </span>
         </div>
       </div>
+      {aboutPosts.map((post) => (
+        <article
+          key={post.slug}
+          className="container py-6 dark:prose-invert prose max-w-6xl mx-auto no-underline"
+        >
+          <MDXcomponent code={post.body} />
+        </article>
+      ))}
     </div>
   );
 }
