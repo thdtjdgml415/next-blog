@@ -31,6 +31,7 @@ export function extractHeadings(mdast: Root | undefined): HeadingTreeProps[] {
   return headings; // 추출된 헤딩 정보를 반환
 }
 
+// headTree 가져와 정규식으로 수정
 export function generateTableOfContents(mdast: Root | undefined) {
   const headings = extractHeadings(mdast);
   const transformedHeadings = headings.map((heading) => ({

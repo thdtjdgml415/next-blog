@@ -6,6 +6,7 @@ import "@/styles/mdx.css";
 import { Metadata } from "next";
 import { siteConfig } from "@/config/site";
 import { Tag } from "@/components/tag";
+import { formatDate } from "@/lib/utils";
 
 interface PostPageProps {
   params: {
@@ -80,6 +81,7 @@ export default async function PostPage({ params }: PostPageProps) {
       {post.description ? (
         <p className="text-xl mt-0 text-muted-foreground">{post.description}</p>
       ) : null}
+      <div>{formatDate(post.date)}</div>
       <ul className="p-0">
         {post.headingTree.map((tree) => {
           return (

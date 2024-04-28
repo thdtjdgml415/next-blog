@@ -32,6 +32,15 @@ export function MainNav() {
       >
         소개
       </Link>
+      <Link
+        href="/series"
+        className={cn(
+          "text-sm font-medium transition-colors hover:text-primary hidden sm:inline-block",
+          pathname === "/series" ? "text-foreground" : "text-foreground/60"
+        )}
+      >
+        시리즈
+      </Link>
     </nav>
   );
 }

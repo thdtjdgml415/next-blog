@@ -1,0 +1,12 @@
+{
+  "series1": {
+    "Mordern": "Mordern",
+    "title": "모던 자바스크립트",
+    "description": "모던 자바스크립트를 읽고 정리한 글 입니다."
+  },
+  "series2": {
+    "react": "react",
+    "title": "리액트 심화",
+    "description": "리액트 컴포넌트와 상태 관리에 대해 심도있게 다룹니다."
+  }
+}
