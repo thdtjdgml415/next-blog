@@ -9,14 +9,14 @@ export const metadata: Metadata = {
   description: "This page collects articles by series.",
 };
 
-export const seriesDescriptions = [
-  {
-    subject: "Mordern",
-    description: "모던 자바스크립트를 읽고 정리한 글 입니다.",
-  },
-];
-
 export default function series() {
+  const seriesDescriptions = [
+    {
+      subject: "Mordern",
+      description: "모던 자바스크립트를 읽고 정리한 글 입니다.",
+    },
+  ];
+
   const getSeriesPost = groupPostsBySeries(posts);
 
   return (
