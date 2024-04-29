@@ -33,13 +33,15 @@ export function PostItem({
             <dl>
               <dt className="sr-only">Published On</dt>
               <dd className="text-xs sm:text-base font-medium flex items-center gap-1">
-                <Calendar className="h-4 w-4" />
+                <Calendar className="h-4 w-4 group-hover:text-ST_postive" />
                 <time dateTime="date">{formatDate(date)}</time>
               </dd>
             </dl>
           </div>
 
-          <div className="max-w-none text-muted-foreground">{description}</div>
+          <div className="max-w-none text-muted-foreground group-hover:text-ST_postive">
+            {description}
+          </div>
         </div>
         {thumbnail ? (
           <Image
@@ -51,7 +53,7 @@ export function PostItem({
           />
         ) : null}
       </div>
-      <div className="flex gap-2">
+      <div className="flex gap-2 overflow-auto">
         {tags?.map((tag) => {
           return <Tag tag={tag} key={tag} />;
         })}
