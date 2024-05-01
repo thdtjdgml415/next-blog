@@ -26,7 +26,7 @@ export function PostItem({
     <article className="flex flex-col gap-2 border-border border-b py-3 px-2 group">
       <div className="flex justify-between">
         <div>
-          <h2 className="text-2xl font-bold  mb-2 group-hover:ml-5 group-hover:text-ST_postive group-hover:rotate-1 transition-all">
+          <h2 className="text-2xl font-bold  mb-2  group-hover:text-ST_postive transition-all">
             <Link href={"/" + slug}>{title}</Link>
           </h2>
           <div className="flex justify-between items-center mb-1">
@@ -49,7 +49,7 @@ export function PostItem({
             alt="블로그 썸네일"
             width={100}
             height={100}
-            className="object-contain group-hover:translate-x-5 transition-all"
+            className="object-contain group-hover:-translate-y-2 transition-all"
           />
         ) : null}
       </div>

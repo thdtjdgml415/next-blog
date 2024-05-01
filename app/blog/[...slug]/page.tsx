@@ -82,7 +82,8 @@ export default async function PostPage({ params }: PostPageProps) {
         <p className="text-xl mt-0 text-muted-foreground">{post.description}</p>
       ) : null}
       <div>{formatDate(post.date)}</div>
-      <ul className="p-0">
+      <ul className="px-3 border-muted-foreground border-2 rounded-lg">
+        <p className="text-lg text-muted-foreground">목차</p>
         {post.headingTree.map((tree) => {
           return (
             <li key={tree.value} className="list-none">

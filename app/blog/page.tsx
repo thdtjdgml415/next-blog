@@ -40,7 +40,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           </p>
         </div>
       </div>
-      <div className="grid grid-cols-12 gap-3 mt-5">
+      <div className="grid grid-cols-12 gap-9 mt-5">
         <div className="col-span-12 col-start-1 sm:col-span-8">
           <QueryPagination totalPages={totalPages} className="justify-end" />
           <hr className="mt-8" />
