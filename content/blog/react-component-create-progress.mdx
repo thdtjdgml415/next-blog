@@ -1,0 +1,39 @@
+---
+title: 리액트에서 컴포넌트 처리과정 & 트리 생성법
+description: 리액트에서는 어떻게 컴포넌트를 처리하고 트리를 생성할까?
+date: 2024-05-01
+tags: [react, component, tree]
+published: true
+---
+
+# 컴포넌트 처리과정과 트리 생성법
+
+웹 사이트에 소스코드를 점검해보면
+
+![컴포넌트 처리과정 & 트리 생성법1](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/react/react-component-create-progress1.webp)
+
+웹사이트 내용이 존재하지 않는다.
+
+약간의 자바스크립트와 메타데이터가 존재함.
+
+index.jsx 파일안에 소스코드가 존재하는데 작정한 react 코드가 컴파일되어 들어가 있는것을 볼 수 있다.
+
+![컴포넌트 처리과정 & 트리 생성법2](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/react/react-component-create-progress2.webp)
+
+우리가 작성한 코드는 브라위저에서 실행되지 않지만
+
+우리의 프로젝트를 살펴보면 index.html 파일을 클라이언트에게 보여주고 있는것이다.
+
+![컴포넌트 처리과정 & 트리 생성법3](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/react/react-component-create-progress3.webp)
+
+이 파일을 보면 index.jsx 파일을 불러오고 있으며 index.jsx파일에는
+
+![컴포넌트 처리과정 & 트리 생성법4](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/react/react-component-create-progress4.webp)
+
+App.jsx 파일을 import해봐서 사용하고 있다.
+
+index.jsx파일은 html파일을 로딩할때 리액트 앱의 주요 입구로 작용하여 아주 중요한 예외적인 경우 이다.
+
+이 위치에서 리액트 앱이 부팅된다고 할 수 있고 Dom에 들어가 브라우저가 읽을 수 있는 문법으로 변경되 앱 컴포넌트가 결과적으로 렌더링 된다.
+
+![컴포넌트 처리과정 & 트리 생성법5](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/react/react-component-create-progress5.webp)
