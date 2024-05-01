@@ -33,7 +33,7 @@ export function PostItem({
             <dl>
               <dt className="sr-only">Published On</dt>
               <dd className="text-xs sm:text-base font-medium flex items-center gap-1">
-                <Calendar className="h-4 w-4 group-hover:text-ST_postive" />
+                <Calendar className="h-4 w-4" />
                 <time dateTime="date">{formatDate(date)}</time>
               </dd>
             </dl>
@@ -49,7 +49,7 @@ export function PostItem({
             alt="블로그 썸네일"
             width={100}
             height={100}
-            className="object-contain"
+            className="object-contain group-hover:translate-x-5 transition-all"
           />
         ) : null}
       </div>
