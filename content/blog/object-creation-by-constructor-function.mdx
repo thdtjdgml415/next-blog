@@ -1,0 +1,211 @@
+---
+title: 생성자 함수에 의한 객체 생성
+description: 다양한 생성자 함수로 객체를 생성해보자.!
+date: 2024-05-01
+tags: [javascript, object, new, function]
+series: Mordern
+published: true
+---
+
+![생성자 함수에 의한 객체 생성 썸네일](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/object-creation-by-constructor-function.webp)
+
+다양한 객체 생성 방식 중에서 생성자 함수를 사용하여 객체를 생성하는 방식이 있다.
+
+# 1. Object 생성자 함수
+
+---
+
+new 연산자와 함께 생성자 함수를 호출하면 빈 객체를 생성해서 반환한다. 객체에 프로퍼티나 또는 메서드를 추가해 객체를 완성한다.
+
+```jsx
+// 빈 객체 생성
+const person = new Object();
+
+// 프로퍼티 추가
+person.name = "Lee";
+person.sayHello = function () {
+  console.log("Hi My name is " + this.name);
+};
+
+console.log(person); //{ name: 'Lee', sayHello: [Function (anonymous)] }
+
+person.sayHello(); // Hi My name is Lee
+```
+
+`생성자 함수` **: new 연산자와 함께 호출하여 객체(인스턴스)를 생성하는 함수이다.**
+
+`**인스턴스` : 생성자 함수에 의해 만들어진 객체이다.\*\*
+
+**자바스크립트는 Object 생성자 함수 이외에도 다양한 빌트 인 함수를 제공한다.**
+
+- **주요 빌트인 생성자 함수들**
+
+  1. `Object`: 일반적인 객체를 생성합니다.
+
+     ```jsx
+     let obj = new Object();
+     ```
+
+  2. `Array`: 배열 객체를 생성합니다.
+
+     ```jsx
+     let arr = new Array(1, 2, 3);
+     ```
+
+  3. `String`: 문자열 객체를 생성합니다.
+
+     ```jsx
+     let str = new String("Hello");
+     ```
+
+  4. `Number`: 숫자 객체를 생성합니다.
+
+     ```jsx
+     let num = new Number(123);
+     ```
+
+  5. `Boolean`: 불린 객체를 생성합니다.
+
+     ```jsx
+     let bool = new Boolean(true);
+     ```
+
+  6. `Function`: 함수 객체를 생성합니다.
+
+     ```jsx
+     let func = new Function("x", "y", "return x + y");
+     ```
+
+  7. `Date`: 날짜와 시간을 다루는 객체를 생성합니다.
+
+     ```jsx
+     let date = new Date();
+     ```
+
+  8. `RegExp`: 정규 표현식 객체를 생성합니다.
+
+     ```jsx
+     let regexp = new RegExp("\\d+");
+     ```
+
+  9. `Error`: 에러 객체를 생성합니다. (예: `new Error()`, `new TypeError()`, `new SyntaxError()` 등)
+
+# 2. 생성자 함수
+
+---
+
+## 2.1 객체 리터럴에 의한 객체 생성 방식의 문제점
+
+**객체 리터럴에 의한 방식은 객체 하나만 생성**이 가능하기 때문에 **효율적이지 못하다**. 따라서 동일한 프로퍼티를 갖는 객체의 경우 여러 개를 기술해야 한다.
+
+```jsx
+const circle1 = {
+  radius: 5,
+  getDiameter() {
+    return 2 * this.radius;
+  },
+};
+console.log(circle1.getDiameter()); // 10
+
+const circle2 = {
+  radius: 10,
+  getDiameter() {
+    return 2 * this.radius;
+  },
+};
+console.log(circle2.getDiameter()); // 20
+```
+
+위 코드에서 두 객체의 프로퍼티의 값은 다르지만 메서드는 동일하다. **객체 리터럴**에 의해 생성하는 경우 프로퍼티의 구조는 동일하지만 **매번 같은 프로퍼티와 메서드를 기술 해야하는 단점**이 있다.
+
+## 2.2 생성자 함수에 의한 객체 생성 방식의 장점
+
+생성자 함수에 의한 객체 생성 방식은 생성자 함수를 사용하여 프로퍼티 구조가 동일한 객체 여러 개를 간편하게 생성할 수 있다.
+
+```jsx
+// 생성자 함수
+function Circle(radius) {
+  // 생성자 함수 내부의 this는 생성자 함수가 생성할 인스턴스를 가리킨다.
+  this.radius = radius;
+  this.getDiameter = function () {
+    return 2 * this.radius;
+  };
+}
+const circle3 = new Circle(5);
+const circle4 = new Circle(10);
+console.log(circle3.getDiameter()); // 10
+console.log(circle4.getDiameter()); // 20
+```
+
+- **`this` 란?**
+
+  this는 객체 자신의 프로퍼티나 메서드를 참조하기 위한 자기 참조 변수다. this가 가리키는 값, 즉 this 바인딩은 함수 호출 방식에 따라 동적으로 결정된다.
+
+  | 함수 호출 방식       | this가 가리키는 값(this 바인딩)        |
+  | -------------------- | -------------------------------------- |
+  | 일반 함수 호출       | 전역 객체                              |
+  | 메서드로서 호출      | 메서드를 호출한 객체(마침표 앞의 객체) |
+  | 생성자 함수로서 호출 | 생성자 함수가 (미래에) 생성할 인스턴스 |
+
+자바와 같은 클래스 기반의 객체지향언어의 생성자와는 형식이 정해져 있는 것이 아닌 일반 함수와 동일하게 생성하여 **new 연산자로 호출하면 생성자 함수로서 동작하고 일반 함수처럼 호출하면 일반 함수로 동작**한다.
+
+## 2.3 생성자 함수의 인스턴스 생성 과정
+
+생성자 함수를 만드는 이유는 **프로퍼티 구조가 동일한 인스턴스를 생성하기 위한 것이다**. 또한 생성된 인스턴스를 **초기화( 인스터스 프로퍼티 추가 및 초기값 할당)하는 것이다**.
+
+생성자 함수가 `인스턴스를 구성`하는 것은 **필수**이고 생성된 `인스턴스를 초기화`하는 것은 **옵션**이다.
+
+```jsx
+// 생성자 함수
+function Circle1(radius) {
+  // 1. 암묵적으로 빈 객체가 생성되고 this에 바인딩
+  // 2. this에 바인딩되어 있는 인스턴스를 초기화
+
+  //인스턴스 초기화
+  this.radius = radius;
+  this.getDiameter = function () {
+    return 2 * this.radius;
+  };
+
+  // 3. 완성된 인스턴스가 바인딩된 this를 암묵적으로 반환
+}
+// 인스턴스 생성.
+const circle5 = new Circle1(5); // 반지름이 5인 Circle1 객체 생성
+```
+
+위 코드에서 Circle1 생성자 함수에서 인스턴스를 생성하고 반환하는 코드가 보이지 않는다. 이는 자바스크립트 엔지에서 암묵적 처리를 통해 인스턴스를 생성하고 반환한다.
+
+- 인스턴스 생성과 this 바인딩
+
+  암묵적으로 빈 객체가 생성되고 암묵적으로 생성된 빈 객체 , 즉 인스턴스에 바인딩된다. 런타임 이전에 실행된다.
+
+<aside>
+  바인딩이란 식별자와 값을 연결하는 과정을 의미한다. 예를 들어, 변수 선언은 변수
+  이름(식별자)과 확보된 메모리 공간의 주소를 바인딩 하는 것이다. this 바인딩은
+  `this`와 `this가 가리킬 객체`를 바인딩 하는 것이다.
+</aside>
+
+- 인스턴스 초기화
+
+  `this`에 바인딩되어 있는 인스턴스에 프로퍼티나 메서드를 추가하고 생성자 함수가 인수로 전달받은 초기값을 인스턴스 프로퍼티에 할당하여 초기화하거나 고정값을 할당
+
+**생성자 함수에서 원시 값을 반환하면 원시 값은 무기되고 암묵적으로 this가 반환된다.**
+
+```jsx
+// 생성자 함수
+function Circle2(radius) {
+  // 1. 암묵적으로 빈 객체가 생성되고 this에 바인딩
+  // 2. this에 바인딩되어 있는 인스턴스를 초기화
+  //인스턴스 초기화
+  this.radius = radius;
+  this.getDiameter = function () {
+    return 2 * this.radius;
+  };
+  // 3. 완성된 인스턴스가 바인딩된 this를 암묵적으로 반환
+  // 명시적으로 원시 값을 반환하면 원시 값 반환은 무시되고 암묵적으로 this가 반환
+  return 100;
+}
+// 인스턴스 생성.
+const circle6 = new Circle2(5); // 반지름이 5인 Circle1 객체 생성
+console.log(circle6); // Circle2 { radius: 5, getDiameter: [Function (anonymous)] }
+```
