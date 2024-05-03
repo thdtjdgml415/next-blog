@@ -1,0 +1,196 @@
+---
+title: this
+description: this.. 인스턴스???
+date: 2024-05-03
+tags: [javascript, mordern, this]
+series: Mordern
+published: true
+---
+
+![this 썸네일](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/this.webp)
+
+## 1. this 키워드
+
+---
+
+객체는 **상태**를 나타내는 **프로퍼티**와 **동작**을 나타내는 **메서드**를 하나로 묶은 복합적인 자료구조이다.
+
+객체에 들어있는 메서드를 실행하기 위해서는 자신이 속한 객체의 상태에 접근, **즉 프로퍼티를 참조해 변경할 수 있어야 한다.** 객체 리터럴 방식으로 생성한 경우 메서드 내부에서 메서드 자신이 속한 객체를 가리키는 식별자를 재귀적으로 참조한다.
+
+```jsx
+const circle = {
+  radius: 5,
+  getDiameter() {
+    return 2 * circle.radius;
+  },
+};
+
+console.log(circle.getDiameter(10)); // 10
+```
+
+객체 리터럴은 이미 `circle` 변수에 할당 되기 직전에 평가된다. 따라서 `getDiameter` 메서드가 호출되는 시점에는 이미 객체가 생성되어 메서드 내부에서 `circle` 식별자를 참조 할 수 있다.
+
+하지만 **자신이 속한 객체를 재귀적으로 참조하는 방식은 일반적이지 않고 바람직하지도 못하다.**
+
+```jsx
+function Circle(radius) {
+	???.radius = radius
+}
+
+Circle.prototype.getDiameter = function () {
+	return 2 * ???.radius
+}
+
+const circle = new Circle(5);
+```
+
+객체 리터럴은과 다르게 생성자 함수는 new 키워드와 함께 사용하여 인스턴스를 구성해야한다. 따라서 생성자 함수가 인스턴스를 구성하기 전 자기자신을 가리키는 식별자가 따로 존재해야한다. 이때 사용하는 것이 `this` 키워드 다.
+
+`this`는 자신이 속한 객체 또는 자신이 생성할 인스턴스를 가리키는 자기 참조 변수다. `this`를 통해 자신이 속한 객체 또는 자신이 생성할 인스턴스의 **프로퍼티**나 **메서드**를 참조할 수있다.
+
+<aside>
+📔 `this` 바인딩 : 식별자와 값을 연결하는 과정으로 예를 들어, 변수 서언은 변수 이름 과 확보된 메모리 공간의 주소를 바인딩하는 것이다. this 바인딩은 `this`와 `this`가 가리킬 객체를 바인딩 하는 것이다.
+
+</aside>
+
+```jsx
+const circle = {
+  radius: 5,
+  getDiameter() {
+    // this는 메서드를 호출할 객체를 가리킨다.
+    return 2 * this.radius;
+  },
+};
+console.log(circle.getDiameter());
+```
+
+위 예제에서 `this`는 메서드를 호출한 객체를 가리킨다
+
+```jsx
+function Circle(radius) {
+  // this는 생성자 함수가 생성할 인스턴스를 가리킨다.
+  this.radius = radius;
+}
+Circle.prototype.getDiameter = function () {
+  // this는 생성자 함수가 생성할 인스턴스를 가리킨다.
+  return 2 * this.radius;
+};
+
+const circle = new Circle(5);
+console.log(circle.getDiameter());
+```
+
+생성자 함수의 `this`는 생성할 인스턴스를 가리킨다는 것에 차이점이 있다.
+
+자바스크립트의 `this`는 다른 클래스 기반의 언어들과 달리 함수가 호출되는 방식에 따라 `this`에 바인딩 될 값, 즉 바인딩이 동적으로 결정된다.
+
+```jsx
+//this는 어디서든 참조가 가능하다.
+// 전역에서 this는 window
+console.log(this); // 브라우저 window, node.js : undefined
+
+function square(number) {
+  // 일반 함수 내부에서 this도 전역 객체다.
+  console.log(this); // window, undefined
+  return number * number;
+}
+
+square(2);
+
+const person = {
+  name: "Lee",
+  // 메서드 내부에서 this는 호출한 객체를 가리킨다.
+  getName() {
+    console.log(this); //{ name: 'Lee', getName: [Function: getName] }
+    return this.name;
+  },
+};
+console.log(person.getName()); //Lee
+
+function Person(name) {
+  this.name = name;
+  // 생성자 함수가 생성할 인스턴스를 가리킨다.
+  console.log(this); //Person { name: 'Lee' }
+}
+const me = new Person("Lee");
+```
+
+## 2. 함수 호출 방식과 this 바인딩
+
+---
+
+this 바인딩(this에 바인딩 될 값)은 함수 호출방식. 즉 함수가 어떻게 호출되었는지에 따라 동적으로 결정된다.
+
+| 호출 방식       | this 바인딩                                | 설명                                                                                       |
+| --------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| 일반 함수 호출  | 전역 객체 (window / global) 또는 undefined | 함수가 독립적으로 호출될 때, this는 전역 객체 또는 엄격 모드에서 undefined에 바인딩됩니다. |
+| 메서드 호출     | 메서드를 호출한 객체                       | 객체의 메서드로서 호출되면, this는 해당 메서드를 호출한 객체에 바인딩됩니다.               |
+| 생성자 호출     | 새로 생성된 객체                           | new 키워드와 함께 함수가 생성자로 호출되면, this는 새로 생성된 객체에 바인딩됩니다.        |
+| apply/call/bind | 명시적으로 지정된 객체                     | apply, call, bind를 사용하면 this를 특정 객체에 명시적으로 바인딩할 수 있습니다.           |
+
+<aside>
+📔 렉시컬 스코프와 this 바인딩은 결정 시기가 다르다. 함수의 상위 스코프를 결정하는 방식인 렉시컬 스코프는 함수 정의가 평가되어 함수 객체가 생성되는 시점에 상위스코프를 결정한다. 하지만 this 바인딩은 함수 호출 시점에 결정된다.
+
+</aside>
+
+### 2.1 함수 호출 방식(Function Invocation)
+
+- **일반 함수 호출**: 가장 일반적인 함수 호출 방식이다. 이 경우 `this`는 전역 객체(global object)에 바인딩된다. 브라우저에서는 `window`가 전역 객체이며, Node.js에서는 `global`이 그 역할을 한다.
+- 엄격 모드('use strict'): 엄격 모드에서는 일반 함수 호출에서 `this`가 `undefined`로 바인딩된다.
+
+```jsx
+function show() {
+  console.log(this); // 일반 모드: window, 엄격 모드: undefined
+}
+show();
+```
+
+### 2.2 메서드 호출 방식(Method Invocation)
+
+- **객체의 메서드로서 호출**: 함수가 어떤 객체의 메서드로 호출될 때, `this`는 그 메서드를 호출한 객체에 바인딩된다.
+- 하지만 `obj` 객체의 `greet` 프로퍼티가 가리키는 함수 객체는 `obj`에 포함되어 있는 것이 아니라 **독립적으로 존재하는 별도의 객체다.** `greet` 프로퍼티가 함수 객체를 가리키고 있을 뿐이다.
+
+```jsx
+const obj = {
+  name: "Alice",
+  greet() {
+    console.log(`Hello, ${this.name}`);
+  },
+};
+obj.greet(); // this는 obj에 바인딩됨
+
+const getName = obj.greet;
+
+console.log(getName()); // 변수에 할당해 일반 함수 호출
+```
+
+따라서 greet 메서드는 다른 객체의 프로퍼티에 할당하는 것으로 다른 객체의 메서드가 될 수도 있고 일반 변수에 할당하여 일반 함수로 호출 될수도 있다.
+
+### 2.3 생성자 호출 방식(Constructor Invocation)
+
+- **new 연산자와 함께 호출**: 함수가 생성자로 사용될 때 `new` 키워드와 함께 호출되면, 함수 내의 `this`는 새로 생성되는 객체에 바인딩된다. 이 객체는 함수의 프로토타입을 상속받는다.
+
+```jsx
+function Person(name) {
+  this.name = name;
+}
+const alice = new Person("Alice");
+console.log(alice.name); // Alice
+```
+
+### 2.4. apply/call/bind 호출 방식
+
+- **apply, call, bind 메서드 사용**: 이 메서드들을 사용하면, `this`를 명시적으로 설정할 수 있다. `apply`와 `call`은 즉시 함수를 호출하며, `bind`는 새로운 함수를 반환한다.
+
+```jsx
+function introduce(job) {
+  console.log(`My name is ${this.name} and I am a ${job}.`);
+}
+
+const user = { name: "Bob" };
+const describe = introduce.bind(user, "Developer");
+describe(); // My name is Bob and I am a Developer.
+
+introduce.call(user, "Designer"); // My name is Bob and I am a Designer.
+introduce.apply(user, ["Painter"]); // My name is Bob and I am a Painter
+```
