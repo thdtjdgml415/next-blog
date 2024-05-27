@@ -1,0 +1,301 @@
+---
+title: Tree Data Structure
+description: 트리구조에 대하여
+date: 2024-05-27
+tags: [javascript, algorithm, structure]
+series: 자료 구조
+published: true
+---
+
+## 트리 데이터 구조
+
+트리구조는 계층적 데이터 구조의 한 종류다. Node로 구성되어 있고 Node들 간의 부모 - 자식의 관계를 갖는다. 트리는 비선형 데이터 구조이고 트리는 Root 노드부터 시작해 나무가지 뻗어나가듯 계층을 갖는다.
+
+## 기본용어
+
+- **루트 노드 (Root Node)**: 트리의 최상위 노드로, 부모가 없는 유일한 노드이다.
+- **내부 노드 (Internal Node)**: 자식 노드를 가지는 노드이다.
+- **리프 노드 (Leaf Node)**: 자식 노드가 없는 노드로, 말단 노드 또는 단말 노드라고도 한다.
+- **부모 노드 (Parent Node)**: 자식 노드를 가지는 노드이다.
+- **자식 노드 (Child Node)**: 부모 노드로부터 직접 연결된 노드이다..
+- **형제 노드 (Sibling Node)**: 같은 부모를 가지는 노드들이다.
+- **레벨 (Level)**: 트리에서의 깊이를 나타내며, 루트 노드는 레벨 0에 있다. **즉, 시작지점이 0레벨이다.**
+- **깊이 (Depth)**: 특정 노드에서 루트 노드까지의 경로 길이이다..
+- **높이 (Height)**: 트리의 최대 레벨이다. 루트 노드에서 가장 먼 리프 노드까지의 경로 길이를 말한다.
+- **서브트리 (Subtree)**: 트리의 일부를 이루는 자식 노드와 그 자식들로 이루어진 트리다.
+
+수많은 트리의 종류는 다양한다. 이는 너무 많아서 다 설명할 수 없다. 그렇기 때문에 이 글에서는 대표적인 트리구조인 **이진 트리에 대해 알아보고 그 중 특정한 규칙을 갖는 이진 검색트리에 대해 알아볼 것이다.**
+
+## 이진 트리
+
+이진 트리는 각 노드가 최대 두 개의 자식 노드를 가지는 트리이다.
+
+![트리 데이터구조 썸네일](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/tree-datastructure.webp)
+
+### 특징
+
+- 이진트리는 종류가 다양하기 때문에 삽입, 삭제, 탐색 연산시간이 보장되지 않는다.
+
+### 예시)
+
+```jsx
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+  }
+}
+```
+
+우선 Node 클래스를 정의한다. 하나의 노드는 왼쪽 자식노드와 오르쪽 자식노드를 가질 수 있기 때문에 각각 인스턴스에 정의해 준다.
+
+```jsx
+function buildBinaryTree(array) {
+  if (array.length === 0) return null;
+
+  // 첫 번째 요소를 루트 노드로 설정
+  const root = new Node(array[0]);
+  const queue = [root];
+  let i = 1;
+
+  // 큐를 사용하여 트리의 노드를 순차적으로 생성
+  while (i < array.length) {
+    const currentNode = queue.shift();
+
+    // 왼쪽 자식 노드 추가
+    if (i < array.length) {
+      currentNode.left = new Node(array[i]);
+      queue.push(currentNode.left);
+      i++;
+    }
+
+    // 오른쪽 자식 노드 추가
+    if (i < array.length) {
+      currentNode.right = new Node(array[i]);
+      queue.push(currentNode.right);
+      i++;
+    }
+  }
+
+  return root;
+}
+
+const array = [1, 4, 2, 3, 4, 5];
+const tree = new buildBinaryTree(arrray);
+```
+
+배열로 받은 인자의 첫번째 요소를 `Root`로 설정하고 `queue`에서 노드를 하나씩 꺼내어 차례로 **왼쪽 자식 노드**와 **오른쪽 자식 노드**를 추가한다. 이를 인자로 받은 배열의 모든 요소가 추가될때 까지 반복한다.
+
+이처럼 트리는 `queue`라는 데이터구조를 이용해 **선입선출(PIPO)**을 사용해 구현할 수 있다.
+
+## 트리 순회
+
+트리를 순회하는 과정은 어떻게 할 수 있을까? 우선 트리를 순회하는 방식에는 4가지 방식이 존재한다.
+
+- **전위 순회 (Preorder Traversal)**
+- **중위 순회 (Inorder Traversal)**
+- **후위 순회 (Postorder Traversal)**
+- **레벨 순회 (Level Order Traversal)**
+
+**전위 순회, 중위순회, 후위 순회**는 각각 `push`메서드의 위치를 생각해서 비교하면 이해하기 쉬울것이다.
+
+### 전위 순회
+
+**전휘 순회(DFS)**는 노드, 왼쪽 자식, 오른쪽 자식 순으로 방문한다.
+
+```jsx
+dfsPreOreder() {
+    let data = [];
+    let current = this.root;
+    function traverse(node) {
+        data.push(node.value);
+        if(node.left) traverse(node.left);
+        if(node.right) traverse(node.right);
+    }
+    traverse(current);
+    return data;
+}
+```
+
+참고로 출력은 배열로 하도록 했다.
+
+`traverse` 함수를 사용해 재귀함수를 이용했고 우선 부모 노드를 `data`에 할당하고 부모노드의 왼쪽 노드를 먼저 비교해서 재귀함수를 돌리고 다음 오른쪽 노드를 비교해 `data` 배열에 할당했다.
+
+### 중위 순회
+
+**중위 순회(DFS)**는 왼쪽 자식, 노드, 오른쪽 자식 순으로 방문한다.
+
+```jsx
+dfsInOrder() {
+    let data = [];
+    function traverse(node) {
+        if(node.left) traverse(node.left);
+        data.push(node.value)
+        if(node.right) traverse(node.right);
+    }
+    traverse(this.root)
+    return data;
+}
+```
+
+**전이 순회와 차이는 push 하는 위치에 있다.** 왼쪽 노드를 탐색해 `data` 배열에 할당하고 부모노드를 할당한 다음 오른쪽 노드를 할당하는 순서로 진행한다.
+
+### 후위 순회
+
+**후위 순회(DFS)**는 왼쪽 자식, 오른쪽 자식, 노드 순으로 방문한다.
+
+```jsx
+dfsPostOrder(){
+    let data = [];
+    let current = this.root;
+    function traverse(node) {
+        if(node.left) traverse(node.left);
+        if(node.right) traverse(node.right);
+        data.push(node.value)
+    }
+    traverse(current)
+    return data;
+}
+```
+
+후위 순회는 왼쪽 노드와 오른쪽 노드 순으로 `data`에 할당하고 부모노드를 할당한다.
+
+### 레벨 순회
+
+레벨 순회는 각 레벨 별로 방문한다. (BFS)
+
+```jsx
+bfs() {
+    let node = this.root;
+    let data = [];
+    let queue = [];
+    queue.push(node)
+
+    while(queue.length){
+        node = queue.shift();
+        data.push(node.value);
+        if(node.left) {
+            queue.push(node.left);
+        }
+
+        if(node.right) {
+            queue.push(node.right);
+        }
+    }
+    return data;
+}
+```
+
+레벨 순회는 `queue`의 **선입선출(PIPO)**를 이용해 구현해보았다.
+
+1. 트리 노드를 `queue`에 할당하고 노드의 앞부분부터 하나씩 `node`에 할당해 `queue`의 길이가 0이 될 때 까지 반복한다.
+2. 이는 레벨단위로 반복하기 때문에 부모노드를 왼쪽 노드와 오른쪽 노드가 존재하지 않을때 까지 반복한다고 생각하면 좋을 것이다.
+
+## 이진 검색 트리
+
+이진 검색 트리는 이진 트리의 한 종류로, 각 노드가 특정한 순서를 유지하며 정렬되는 트리다.
+
+### 규칙
+
+- 왼쪽 서브트리: 각 노드의 왼쪽 서브트리에 있는 모든 노드는 그 노드의 값보다 작아야한다.
+- 오른쪽 서브트리: 각 노드의 오른쪽 서브트리에 있는 노드는 그 노드의 값보다 커야한다.
+
+### 특징
+
+- 이진 검색 트리는 삽입, 삭제, 탐색 연산이 O(log n)의 시간 복잡도를 갖고 최대 O(n)의 값을 갖는다.
+
+### 예시
+
+이진 검색 트리는 이진트리와 같이 우선 `Node` 클래스를 정의한다.
+
+```jsx
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+  }
+}
+```
+
+마찬가지로 `left` 서브노드와 `rigth` 서브노드를 갖기 때문에 인스턴스에 정의한다.
+
+```jsx
+class BinarySearchTree {
+  constructor() {
+    this.root = null;
+  }
+}
+let tree = new BinarySearchTree();
+```
+
+이진 검색 트리에서 사용하는 메서드를 사용해 구성하는 방법에 대해 알아보자
+
+### insert
+
+`insert(value)` 메서드는 이진검색트리 데이터 구조에서 알맞은 위치에 값을 삽입하는 메서드다.
+
+```jsx
+insert(value){
+    let newNode = new Node(value);
+    if(this.root === null) {
+        this.root = newNode;
+        return this;
+    } else {
+        let current = this.root;
+        while(true) {
+            if(value === current.value) return undefined;
+            if(value < current.value) {
+                if(current.left === null) {
+                    current.left = newNode;
+                    return this;
+                } else {
+                    current = current.left;
+                }
+            } else if(value > current.value) {
+                if(current.right === null ) {
+                    current.right = newNode;
+                    return this
+                } else {
+                    current = current.right;
+                }
+            }
+        }
+    }
+}
+```
+
+1. `insert` 메서드는 인자 값으로 value값을 받아 새로운 노드를 구성한다. `this.root`가 `null`이라면 `root`로 `value` 값으로 구성한다.
+2. 변수 `current`는 현재 탐색하고 있는 `root` 값으로 할당하고 **이진 검색 트리 조건**에 따라 `value`값으로 만든 `newNode`와 현재 노드의 `value`값과 비교해 방향을 설정한다.
+3. `value` 값과 같은 값이 있다면 `undefined`를 반환한다.
+4. 방향을 설정했다면 `current.left`, `current.right` 값이 `null`일때 까지 탐색해 알맞은 위치에 값을 삽입한다.
+
+### contain
+
+`contain(value)` 메서드는 **이진 검색 트리** 데이터 구조에서 value 값이 존재하는지 확인하는 메서드다.
+
+```jsx
+contain(value) {
+    if(this.root === null) return false;
+    let current  = this.root;
+    while(current) {
+        if(value < current.value) {
+            current = current.left;
+        } else if(value > current.value) {
+            current = current.right;
+        } else {
+            return true
+        }
+    }
+    return false;
+}
+```
+
+1. `contain()` 메서드를 사용하는 이진 검색 트리 구조는 특정한 규칙을 가지는 데이터 구조이기 때문에 조건을 확인하는 것이 좋다.
+2. 부모 노드보다 왼쪽에 있는 노드가 작은 노드 이기 때문에 `current` 변수에 할당된 노드의 `value`보다 작다면 왼쪽 노드로 크다면 오른쪽 노드를 확인하기 때문에 절반씩 데이터를 줄일 수 있다.
+3. 해당 과정을 반복해 존재한다면 `true`, 존재하지 않는다면 `false`를 반환한다.
+
+## 정리
+
+트리 데이터 구조는 나무가 가지치기 하듯이 뻗어나가는 계층적 데이터 구조이다. 트리의 대표적인 예시로 폴더 구조가 있다. 트리 구조는 매우 다양하지만, 그 중에서도 가장 기본이 되는 이진 트리 구조에 대해 공부해 보았다. 이진 트리는 각 노드가 최대 두 개의 자식 노드를 가지는 트리 구조로, 이를 바탕으로 더 복잡한 트리 구조를 이해할 수 있다. 트리 구조에 대한 기초를 다진 후, 점차적으로 더 복잡한 트리 구조를 정복해나가겠다.

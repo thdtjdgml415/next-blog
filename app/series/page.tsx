@@ -15,6 +15,10 @@ export default function series() {
       subject: "Mordern",
       description: "모던 자바스크립트를 읽고 정리한 글 입니다.",
     },
+    {
+      subject: "자료 구조",
+      description: "자료구조에 대한 시리즈...!!",
+    },
   ];
 
   const getSeriesPost = groupPostsBySeries(posts);
