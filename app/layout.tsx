@@ -8,6 +8,7 @@ import { siteConfig } from "@/config/site";
 import { SiteFooter } from "@/components/site-footer";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -33,6 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-pt-[3.5rem]">
+      <GoogleAnalytics />
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",

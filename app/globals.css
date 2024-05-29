@@ -33,9 +33,9 @@ tbody tr td {
 }
 
 code {
-  background: #cccccc;
+  background: #f3f3f3;
   border: 1px solid #ababab;
-  padding: 1px 2px;
+  padding: 1px 5px;
   border-radius: 5px;
   color: #f54364 !important;
 }
