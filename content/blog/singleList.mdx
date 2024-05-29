@@ -1,0 +1,289 @@
+---
+title: 단일 연결 리스트
+description: 단일 연결 리스트에 대하여...!
+date: 2024-05-29
+tags: [javascript, algorithm, structure, singleLinkedList]
+series: 자료 구조
+published: true
+---
+
+# 단일 연결 리스트
+
+단일 연결 리스트는 선형 자료구조로 각 노드마다 데이터와 다음 노드를 가리키는 포인터(연결)로 구성된다. 이러한 구조는 데이터를 순차적으로 접근하는 동시에, 데이터를 추가하거나 제거하는데 유용하다.
+
+## 단일 연결 리스트의 특징
+
+- **동적 크기 조정**
+- **효율적인 삽입/삭제**
+- **순차 접근**
+
+예시를 보면서 살펴보자.
+
+## 단일 연결 리스트의 구성 요소
+
+- **노드(Node)** : 데이터와 다음 노드를 가리키는 포인터로 구성
+- **헤드(Head)**: 리스트의 첫 번째 노드를 가리킵니다.
+- **테일(Tail)**: 리스트의 마지막 노드를 가리키며, 이 노드의 다음 포인터는 `null`이 됩니다.
+
+### 단일 연결 리스트의 기본 구조 예시
+
+```jsx
+class Node {
+  constructor(val) {
+    this.val = val;
+    this.next = null;
+  }
+}
+```
+
+우선 노드를 생성하는 `class`를 생성한다. 이는 단일 연결 리스트에서 데이터와 다음 노드를 가리키는 데이터를 담는 곳이다.
+
+단일 연결 리스트를 생성할 때 노드 단위로 생성하게 되는데 매번 새로 생성하는 코드를 짜기 보단 이렇게 노드를 생성하는 `class` 구성해 수고를 덜어 주기 위해 작성한다.
+
+```jsx
+class SingleyLinkedList {
+  constructor() {
+    this.head = null;
+    this.tail = null;
+    this.length = 0;
+  }
+}
+```
+
+`SingleyLinkedList` 클래스를 생성하고 클래스 인스턴스에 head와 tail 값과 길이를 정의한다. 현재 단일 연결 리스트에는 아무 값도 존재하지 않는다.
+
+## 단일 연결 리스트 메서드
+
+단일 연결 리스트에는 `push`, `pop`, `shift`, `unshift`, `get` 등의 기능을하는 메서드가 존재하는데 이는 단일 연결 리스트의 특성에 맞게 메서드의 이름을 정의한 것이다.
+
+> 나는 편의를 위해 자바스크립트 내장 메서드와 이름을 똑같이 만들었지만 사실 사용자가 이름을 정하기 나름이다.
+
+### push
+
+`push()` 메서드는 단일연결 리스트에 새로 노드를 추가하고 `tail` 부분을 새로 추가한 노드로 옮기는 동작을 한다.
+
+```jsx
+  push(val) {
+    var newNode = new Node(val);
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = this.head;
+    } else {
+      this.tail.next = newNode;
+      this.tail = newNode;
+    }
+    this.length++;
+    return this;
+  }
+```
+
+`push(val)` 메서드는 단일 연결 리스트에 마지막 부분 뒤에 새로 `Node`를 할당한다.
+
+1. `val`로 들어온 값으로 `Node`를 생성한다. 그리고 `head`와 `tail`에 새로생성한 노드를 할당한다.
+
+   ![단일 연결 리스트 데이터구조1](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/data-structure/singleList/singleList1.webp)
+
+2. 나머지 경우에는 이미 `Node`가 존재하고 있기 때문에 새로 만든 노드를 `tail`의 `next` 부분에 추가한다.
+3. 그리고 기존에 있던 tail의 value를 새로운 노드로 변경하고 길이를 증가시킨다.
+
+![단일 연결 리스트 데이터구조2](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/data-structure/singleList/singleList2.webp)
+
+push() 메서드는 자바스크립트에 내장된 메서드와 똑같이 동작한다.
+
+### pop
+
+`pop()` 메서드는 인자를 따로 받지 않고 **단일 연결 리스트의 마지막 노드를 제거한다.**
+
+단일 연결 리스트의 `tail` 부분을 지우고 `tail 이전 노드`를 `tail로 만드는 동작`을 하는데 아래 예시를 살펴보면
+
+```jsx
+ pop(){
+        let current = this.head;
+        let newTail = current;
+        if(!current) return undefined;
+        while(current.next) {
+            newTail = current;
+            current = current.next;
+        }
+        this.tail = newTail;
+        this.tail.next = null;
+        this.length--
+        if(this.length === 0) {
+            this.head = null;
+            this.tail = null;
+        }
+        return current;
+    }
+```
+
+1. `pop()` 메서드에서 현재 `Node`를 `current` 변수에 할당하고 head가 존재하지 않다면 단일 연결 리스트가 존재하지 않는 것이기 때문에 삭제할 `Node`또한 존재하지 않아 `undefined`를 출력한다.
+2. `pop()` 메서드는 왼쪽에 `head` 노드부터 리스트를 순회하며 `tail`의 **이전** `Node`를 찾는다. 그렇기 때문에 **빅오(N)의 값을 갖는다.**
+
+   ![단일 연결 리스트 데이터구조3](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/data-structure/singleList/singleList3.webp)
+
+3. `tail` 이전의 값을 `newTail` 변수에 할당하고 이전에 연결 되어있었던 `tail`의 값을 `null`을 할당에 끊는다.
+
+   ![단일 연결 리스트 데이터구조4](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/data-structure/singleList/singleList4.webp)
+
+4. 길이를 1만큼 줄이고 만약 길이가 0이 된다면 **단일 연결 리스트**에 값이 없기 때문에 `head`와 `tail`의 값에 `null`을 할당해 아예 값을 지워버리고 삭제한 `Node`를 반환한다.
+
+`pop()` 메서드 또한 자바스크립트에 내장되어있는 `pop()` 메서드와 동일하게 동작한다.
+
+### shift
+
+`shift()` 메서드는 **단일 연결 리스트**의 앞부분의 `Node`를 삭제하는 역할을 한다.
+
+```jsx
+shift() {
+    if(!this.head) return undefined;
+    let currentHead = this.head;
+    this.head = currentHead.next;
+    this.length--;
+    if(this.length === 0) {
+        this.tail = null;
+    }
+    return currentHead;
+}
+```
+
+1. `head`가 인스턴스에 존재하지 않는다면 단일 연결 리스트에 `Node`가 존재하지 않기 떄문에 삭제할 Node가 존재하지 많아 `undefined`를 출력한다.
+2. 현재 인스턴스에 `head`의 값을 `currentHead` 변수에 할당하고 현재 `head`에는 연결되어있는 다음 `Node`를 할당한다.
+
+   ![단일 연결 리스트 데이터구조5](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/data-structure/singleList/singleList5.webp)
+
+   ![단일 연결 리스트 데이터구조6](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/data-structure/singleList/singleList6.webp)
+
+3. 삭제하기 때문에 `length`를 한개 줄이고 만약 길이가 0이 된다면 `Node`가 존재하지 않기 때문에 `tail`에 `null`값을 할당한다.
+4. 삭제한 `Node`를 반환한다.
+
+`shift()` 메서드 또한 자바스크립트에 내장되어있는 `shift()` 메서드와 동일하게 동작한다.
+
+### unshift
+
+`unshift(val)` 메서드는 단일 링크 리스트에 `head`부분에 새로운 `Node`를 추가해 길이를 1 증가시킨다.
+
+```jsx
+unshift(val) {
+    let newNode = new Node(val);
+    if(!this.head) {
+        this.head = newNode;
+        this.tail = this.head;
+    } else {
+        newNode.next = this.head;
+        this.head = newNode;
+    }
+    this.length++;
+    return this;
+}
+```
+
+1. 우선 `val`로 연결 시키고자 하는 `value`를 인자로 받는다.
+
+   ![단일 연결 리스트 데이터구조7](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/data-structure/singleList/singleList7.webp)
+
+2. 3을 `value`로 갖는 노드를 만들고 `head`가 존재하지 않는다면 링크드 리스트가 존재하지 않기 때문에 `head`와 `tail`에 `Node`를 추가한다.
+3. 그게 아니라면 새로운 `Node.next`에 이전에 `head` 값을 연결하고 `head`에 새로운 `Node`를 추가한다.
+
+   ![단일 연결 리스트 데이터구조8](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/data-structure/singleList/singleList8.webp)
+
+### get
+
+`get(index)`메서드는 단일 연결 리스트에 `Node`를 순회하며 인자로 받는 `index`번째에는 어떤 `Node`가 있는지 확인하는 메서드다. **시간복잡도는 O(n)을 갖는다.**
+
+```jsx
+ get(index) {
+    if(index < 0 || index >= this.length) return null;
+    let counter = 0;
+    let current = this.head;
+
+    while(counter !== index) {
+        current = current.next;
+        counter++
+    }
+    return current;
+}
+```
+
+1. `index`를 인자로 받는다.
+2. 만약 `index`가 0보다 작거나 **단일 연결 리스트**의 길이보다 크다면 `Node`는 존재하지 않기 때문에 `Null`을 반환한다.
+3. `counter`를 이용해 **단일 연결 리스트의** `next` 값을 이용해 `counter`의 값과 `index`의 값이 같을때 까지 순회한다.
+4. `while`문을 통해 반복하다 조건에 만족하지 않을때의 `current` 변수에 할당된 `Node`의 값을 반환한다.
+
+### set
+
+`set(index, val)`메서드는 원하는 `index`번째 존재하는 `Node`에 `val` 값으로 업데이트 하는 메서드다. 이 메서드는 위에서 구현한 `get(index)` 메서드를 사용해 구현했다.
+
+```jsx
+set(index, val){
+    let foundNode = this.get(index);
+    if(foundNode) {
+        foundNode.val = val;
+        return true
+    }
+    return false;
+}
+```
+
+1. 인스턴스에 존재하는 단일 연결 리스트에서 `index`를 넣고 찾은 `Node`를 `foundNode` 변수에 할당한다.
+2. 만약 `foundNode`가 존재하지 않으면 인스턴스에 해당 `Node`가 존재하지 않기 때문에 false를 반환해 실패했다는 것을 알린다.
+3. 발견했다면 발견한 `Node`에 `val`값을 인자로 받은 `Node`로 새로 할당한다.
+
+### insert
+
+`insert(index, val)` 메서드는 `index`번째에 `val`로 받은 값을 `Node`로 만들어 새로 추가해 길이는 1 증가 시킨다.
+
+```jsx
+insert(index, val) {
+    if(index < 0 || index > this.length) return false;
+    if(index === 0) return !!this.unshift(val)
+    else if(index === this.length) return !!this.push(val);
+
+    let newNode = new Node(val);
+    let prevNode = this.get(index - 1);
+    let temp = prevNode.next;
+    newNode.next = temp;
+    prevNode.next = newNode;
+    this.length++;
+    return true;
+}
+```
+
+1. 받는 인자 `index`의 범위를 인스턴스의 길이 안쪽으로 지정하고
+2. index가 0이라면 `unshift` 메서드와 같은 동작을 하기 때문에 위에서 구현한 `unshift` 메서드를 활용해 추가하고 단일 연결 리스트의 길이와 같다면 맨 뒤에 노드를 추가하는 것이기 때문에 `push` 메서드를 사용해 추가한다.
+3. 원하는 위치에 `Node`를 `insert`하기 위해선 `index-1번째 Node`를 찾고 `index-1번째  Node.next`를 `temp` 변수에 할당한다.
+
+   ![단일 연결 리스트 데이터구조9](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/data-structure/singleList/singleList9.webp)
+
+4. `temp`를 새로만든 `Node.next`에 할당하고 `prevNode.next`에 새로운 `Node`를 할당한다.
+
+   ![단일 연결 리스트 데이터구조10](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/data-structure/singleList/singleList10.webp)
+
+   ![단일 연결 리스트 데이터구조11](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/data-structure/singleList/singleList11.webp)
+
+### remove
+
+remove(index) 메서드는 index번째 Node를 삭제하기 위한 함수다.
+
+```jsx
+remove(index) {
+    if(index < 0 || index >= this.length) return undefined;
+    let prevNode = this.get(index - 1);
+    let removed = prevNode.next;
+    prevNode.next = removed.next;
+    this.length--;
+    return removed;
+}
+```
+
+1. index이 범위를 인스턴스의 단일 연결 리스트로 한정하고 범위를 벗어나면 undefined를 반환한다.
+2. preNode변수에 index - 1 번째 Node를 get 메서드를 통해 찾아 할당하고 preNode.next의 값을 removed 변수에 할당한다.
+
+   ![단일 연결 리스트 데이터구조12](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/data-structure/singleList/singleList12.webp)
+
+3. removed.next에는 index + 1번째 Node가 있기 때문에 prevNode.next에 할당해 연결 시켜준다.
+
+   ![단일 연결 리스트 데이터구조13](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/data-structure/singleList/singleList13.webp)
+
+# 결론
+
+단일 연결 리스트에서 사용할 수 있는 다양한 메서드를 구현해보는 시간을 가졌다. 단일 연결 리스트는 메서드를 활용해 동적으로 크기를 조정할 수 있으며, 최대 시간 복잡도가 O(n)을 넘지 않아 효율적인 자료구조이다. 특히, 추가와 삭제 작업에 대해 효율적인지 확인할 수 있었다. 배열은 삭제 시 삭제된 인덱스의 자리를 메꾸기 위해 모든 요소를 한 칸씩 앞으로 이동시켜야 하지만, 연결 리스트는 노드의 next 값을 변경하여 연결하기만 하면 되므로 훨씬 효율적이다. 이처럼 오버헤드가 발생하지 않는 장점을 이용한 단일 연결 리스트에 대해 깊이 생각해보는 시간이었다.
