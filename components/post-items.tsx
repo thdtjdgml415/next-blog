@@ -23,7 +23,7 @@ export function PostItem({
   tags,
 }: PostItemProps) {
   return (
-    <article className="flex flex-col gap-2 border-border border-b py-3 px-2 group">
+    <article className="flex flex-col gap-2 border-border border-b py-3 px-2 group hover:bg-[#ccc]/30">
       <div className="flex justify-between">
         <div>
           <h2 className="text-2xl font-bold  mb-2  group-hover:text-ST_postive transition-all">

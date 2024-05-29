@@ -74,6 +74,9 @@ code::before {
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
+    --list: 220 220 220;
+    --list-foreground: 32, 19%, 88%;
+
     --brand-color: #5c67f2;
 
     --border: 214.3 31.8% 91.4%;
@@ -107,6 +110,9 @@ code::before {
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
+
+    --list: 139 69 19;
+    --list-foreground: 248, 39%, 39%;
 
     --brand-color: #9fa4ff;
 
