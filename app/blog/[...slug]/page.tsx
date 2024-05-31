@@ -2,13 +2,19 @@ import { posts } from "#site/content";
 import MDXcomponent from "@/components/mdx-components";
 import { notFound } from "next/navigation";
 
-import "@/styles/mdx.css";
-import next, { Metadata } from "next";
-import { siteConfig } from "@/config/site";
 import { Tag } from "@/components/tag";
+import { buttonVariants } from "@/components/ui/button";
+import { siteConfig } from "@/config/site";
 import { cn, formatDate } from "@/lib/utils";
-import { Button, buttonVariants } from "@/components/ui/button";
+import "@/styles/mdx.css";
+import { Metadata } from "next";
 import Link from "next/link";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 interface PostPageProps {
   params: {
@@ -90,29 +96,36 @@ export default async function PostPage({ params }: PostPageProps) {
         <p className="text-xl mt-0 text-muted-foreground">{post.description}</p>
       ) : null}
       <div>{formatDate(post.date)}</div>
-      <ul className="px-3 border-muted-foreground border-2 rounded-lg">
-        <p className="text-lg text-muted-foreground">목차</p>
-        {post.headingTree.map((tree) => {
-          return (
-            <li key={tree.value} className="list-none">
-              <a
-                href={`#${tree.modifyValue}`}
-                className={`${
-                  tree.depth === 1
-                    ? "ml-0"
-                    : tree.depth === 2
-                    ? "ml-5"
-                    : "ml-10"
-                } mb-1`}
-              >
-                {tree.value}
-              </a>
-            </li>
-          );
-        })}
-      </ul>
 
-      <hr className="my-4" />
+      <Accordion
+        type="single"
+        collapsible
+        className="w-full mb-10"
+        defaultValue="item-1"
+      >
+        <AccordionItem value="item-1">
+          <AccordionTrigger className="text-xl">목차</AccordionTrigger>
+          {post.headingTree.map((tree) => {
+            return (
+              <AccordionContent key={tree.value} className="list-none">
+                <a
+                  href={`#${tree.modifyValue}`}
+                  className={`${
+                    tree.depth === 1
+                      ? "ml-0"
+                      : tree.depth === 2
+                      ? "ml-5"
+                      : "ml-10"
+                  } mb-1`}
+                >
+                  {tree.value}
+                </a>
+              </AccordionContent>
+            );
+          })}
+        </AccordionItem>
+      </Accordion>
+
       <MDXcomponent code={post.body} />
       <hr className="my-4" />
       <div className="flex flex-wrap justify-between">
