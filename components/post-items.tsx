@@ -1,9 +1,11 @@
+"use client";
+
+import { formatDate } from "@/lib/utils";
 import { Calendar } from "lucide-react";
-import Link from "next/link";
-import { buttonVariants } from "./ui/button";
-import { cn, formatDate } from "@/lib/utils";
 import Image from "next/image";
+import Link from "next/link";
 import { Tag } from "./tag";
+import { trackGAEvent } from "@/lib/google-analytics";
 
 interface PostItemProps {
   slug: string;
@@ -22,8 +24,19 @@ export function PostItem({
   thumbnail,
   tags,
 }: PostItemProps) {
+  const submitAnalytics = (
+    title: string,
+    action: string,
+    description: string | undefined
+  ) => {
+    trackGAEvent(title, action, description);
+  };
+
   return (
-    <article className="flex flex-col gap-2 border-border border-b py-3 px-2 group hover:bg-[#ccc]/30">
+    <article
+      className="flex flex-col gap-2 border-border border-b py-3 px-2 group hover:bg-[#ccc]/30"
+      onClick={() => submitAnalytics(title, "Click", description)}
+    >
       <div className="flex justify-between">
         <div>
           <h2 className="text-2xl font-bold  mb-2  group-hover:text-ST_postive transition-all">

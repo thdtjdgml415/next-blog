@@ -8,7 +8,11 @@ const initializeGA = () => {
   console.log("GA가 초기화되었습니다");
 };
 
-const trackGAEvent = (category: any, action: any, label: any) => {
+const trackGAEvent = (
+  category: string,
+  action: string,
+  label: string | undefined
+) => {
   console.log("GA 이벤트:", category, ":", action, ":", label);
   // GA4 이벤트 발송
   ReactGA.event({
