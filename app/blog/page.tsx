@@ -40,7 +40,17 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           </p>
         </div>
       </div>
-      <div className="grid grid-cols-12 gap-9 mt-5">
+      <div className="grid grid-cols-12 mt-5 ">
+        <Card className="col-span-12 row-start-3 h-fit sm:col-span-4 sm:col-start-9 sm:row-start-1">
+          <CardHeader>
+            <CardTitle>Tags</CardTitle>
+          </CardHeader>
+          <CardContent className="flex flex-wrap gap-2">
+            {sortedTags?.map((tag) => (
+              <Tag tag={tag} key={tag} count={tags[tag]} />
+            ))}
+          </CardContent>
+        </Card>
         <div className="col-span-12 col-start-1 sm:col-span-8">
           <QueryPagination totalPages={totalPages} className="justify-end" />
           <hr className="mt-8" />
@@ -67,16 +77,6 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             <p>nothing</p>
           )}
         </div>
-        <Card className="col-span-12 row-start-3 h-fit sm:col-span-4 sm:col-start-9 sm:row-start-1">
-          <CardHeader>
-            <CardTitle>Tags</CardTitle>
-          </CardHeader>
-          <CardContent className="flex flex-wrap gap-2">
-            {sortedTags?.map((tag) => (
-              <Tag tag={tag} key={tag} count={tags[tag]} />
-            ))}
-          </CardContent>
-        </Card>
       </div>
     </div>
   );

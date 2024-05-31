@@ -52,7 +52,7 @@ export function PostItem({
             </dl>
           </div>
 
-          <div className="max-w-none text-muted-foreground group-hover:text-ST_postive">
+          <div className="text-muted-foreground group-hover:text-ST_postive">
             {description}
           </div>
         </div>
