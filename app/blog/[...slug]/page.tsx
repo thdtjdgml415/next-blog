@@ -3,10 +3,12 @@ import MDXcomponent from "@/components/mdx-components";
 import { notFound } from "next/navigation";
 
 import "@/styles/mdx.css";
-import { Metadata } from "next";
+import next, { Metadata } from "next";
 import { siteConfig } from "@/config/site";
 import { Tag } from "@/components/tag";
-import { formatDate } from "@/lib/utils";
+import { cn, formatDate } from "@/lib/utils";
+import { Button, buttonVariants } from "@/components/ui/button";
+import Link from "next/link";
 
 interface PostPageProps {
   params: {
@@ -70,6 +72,12 @@ export default async function PostPage({ params }: PostPageProps) {
   if (!post || !post.published) {
     notFound();
   }
+  const postIndex = posts.findIndex(
+    (p) => p.slugAsParams === post.slugAsParams
+  );
+  const previousPost = postIndex > 0 ? posts[postIndex - 1] : null;
+  const nextPost = postIndex < posts.length - 1 ? posts[postIndex + 1] : null;
+
   return (
     <article className="container py-6 dark:prose-invert prose max-w-3xl mx-auto">
       <h1 className="mb-2">{post.title}</h1>
@@ -106,6 +114,35 @@ export default async function PostPage({ params }: PostPageProps) {
 
       <hr className="my-4" />
       <MDXcomponent code={post.body} />
+      <hr className="my-4" />
+      <div className="flex flex-wrap justify-between">
+        {previousPost && (
+          <Link href={`/blog/${previousPost.slugAsParams}`} className="w-full">
+            <div
+              className={cn(
+                buttonVariants({ variant: "outline" }),
+                "w-full h-16 text-lg border-4 mb-4"
+              )}
+            >
+              <p className="w-full text-center">
+                이전 글 : {previousPost.title}
+              </p>
+            </div>
+          </Link>
+        )}
+        {nextPost && (
+          <Link href={`/blog/${nextPost.slugAsParams}`} className="w-full">
+            <div
+              className={cn(
+                buttonVariants({ variant: "outline" }),
+                "w-full h-16 text-lg border-4"
+              )}
+            >
+              <p className="w-full text-center">다음 글 : {nextPost.title}</p>
+            </div>
+          </Link>
+        )}
+      </div>
     </article>
   );
 }
