@@ -8,12 +8,24 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 // 날짜 한국어로 변환
-export function formatDate(input: string | number) {
+export function formatDate(input: string | number | Date) {
   const date = new Date(input);
   return date.toLocaleDateString("ko-KO", {
     month: "long",
     day: "numeric",
     year: "numeric",
+  });
+}
+
+export function formatDateSec(input: string | number | Date) {
+  const date = new Date(input);
+  return date.toLocaleDateString("ko-KO", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
   });
 }
 

@@ -29,7 +29,8 @@ export function PostItem({
     action: string,
     description: string | undefined
   ) => {
-    trackGAEvent(title, action, description);
+    const nowTime: Date = new Date();
+    trackGAEvent(title, nowTime, description);
   };
 
   return (

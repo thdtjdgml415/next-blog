@@ -1,4 +1,5 @@
 import ReactGA from "react-ga4";
+import { formatDateSec } from "./utils";
 
 const initializeGA = () => {
   // 여러분의 Measurement ID로 교체해주세요
@@ -10,14 +11,15 @@ const initializeGA = () => {
 
 const trackGAEvent = (
   category: string,
-  action: string,
+  action: Date,
   label: string | undefined
 ) => {
-  console.log("GA 이벤트:", category, ":", action, ":", label);
+  let timeFormat = formatDateSec(action);
+  console.log("GA 이벤트:", category, ":", timeFormat, ":", label);
   // GA4 이벤트 발송
   ReactGA.event({
     category: category,
-    action: action,
+    action: timeFormat,
     label: label,
   });
 };
