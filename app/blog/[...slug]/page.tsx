@@ -81,7 +81,7 @@ export default async function PostPage({ params }: PostPageProps) {
   return (
     <article className="container py-6 dark:prose-invert prose max-w-3xl mx-auto">
       <h1 className="mb-2">{post.title}</h1>
-      <div className="flex gap-2 mb-2 ">
+      <div className="flex gap-2 mb-2 overflow-auto">
         {post.tags?.map((tag) => {
           return <Tag key={tag} tag={tag} />;
         })}
@@ -124,7 +124,7 @@ export default async function PostPage({ params }: PostPageProps) {
                 "w-full h-16 text-lg border-4 mb-4"
               )}
             >
-              <p className="w-full text-center">
+              <p className="w-full text-center break-words text-wrap">
                 이전 글 : {previousPost.title}
               </p>
             </div>
@@ -138,7 +138,9 @@ export default async function PostPage({ params }: PostPageProps) {
                 "w-full h-16 text-lg border-4"
               )}
             >
-              <p className="w-full text-center">다음 글 : {nextPost.title}</p>
+              <p className="w-full text-center break-words text-wrap">
+                다음 글 : {nextPost.title}
+              </p>
             </div>
           </Link>
         )}
