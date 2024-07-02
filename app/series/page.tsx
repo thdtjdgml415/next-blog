@@ -16,8 +16,8 @@ export default function series() {
       description: "모던 자바스크립트를 읽고 정리한 글 입니다.",
     },
     {
-      subject: "자료 구조",
-      description: "자료구조에 대한 시리즈...!!",
+      subject: "알고리즘",
+      description: "알고리즘에 대해 시리즈로 정리한 내용입니다.",
     },
   ];
 

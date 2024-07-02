@@ -1,0 +1,213 @@
+---
+title: 알고리즘 기초 상식 및 문자열, 기초수학
+description: 알고리즘에 대한 기초상식과 문자열 메서드에 대해 알아보자
+date: 2024-05-27
+tags: [javascript, algorithm, math, string]
+series: 알고리즘
+published: true
+---
+
+![알고리즘 썸네일](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/algorithm/algorithm.webp)
+
+# 알고리즘에 대해
+
+<aside>
+1️⃣ 알고리즘/자료구조란?
+
+</aside>
+
+- 알고리즘: 일상생활에서 존재하는 문제들을 컴퓨터의 언어에 맞게 해결해야하는 문제
+- 자료구조: 특정 조건에 가장 효율적으로 데이터를 저장하는 방식
+
+<aside>
+2️⃣ 시간복잡도/공간복잡도/빅오 표기법이란?
+
+</aside>
+
+- 시간복잡도: 문제를 해결하는데 걸리는 시간
+
+  - 성능평가 Case
+  - worst Case: 알고리즘이 문제를 해결하기 위해 필요한 시간 중에 가장 오래 걸릴 때 Case
+  - Best Case: 알고리즘이 문제를 해결하기 위해 필요한 시간 중에 가장 빠른 Case
+  - Average Case: 알고리즘이 문제를 해결하기 위해 평균적으로 걸리는 시간 Case
+
+- 공간복잡도: 프로그램이 문제를 해결하기 위해 필요한 메모리가 얼마나 될지 가늠하는 것
+
+# 문자열 메서드
+
+## 1. 문자열 인덱싱과 슬라이싱
+
+```jsx
+// 문자열 인덱싱
+let array = [1, 2, 3, 4, 5];
+array[0] = 6;
+
+console.log(array[0]); // 6
+console.log(array); // [6, 2, 3, 4, 5]
+let string = "string";
+string[0] = "a";
+
+console.log(string[0]); // 's'
+console.log(string); // 'string'
+
+// 문자열 슬라이싱
+let s = "Hello world";
+let index = 3;
+s = s.substring(0, index) + "x" + s.substring(index + 1);
+str = str.split("");
+str[3] = "h";
+str = str.join("");
+```
+
+**문자열은 원시타입 데이터이기 때문에 변경이 불가능하다. 하지만 유사 배열 객체이기 때문에 length속성에 접근과 인덱스를 통한 접근이 가능하다.**
+
+**배열에서 인덱스를 통해 접근이 가능하기 때문에 문자열 또한 접근이 가능하다.**
+
+**하지만 대입연산자를 통해 문자열을 변경할 수는 없다.**
+
+`substring()` **메서드를 이용해 문자열을 슬라이싱 할 수 있다**.
+
+`"문자열".substring(startIndex, endIndex);`
+
+## 2. 특정 문자가 있는지 확인
+
+```jsx
+// String.indexOf()
+const str = "Hello, World, Javascript";
+str.indexOf("Hello"); // 0
+str.indexOf("World"); // 7
+str.indexOf("k"); // -1
+
+// String.includes();
+str.includes("World"); // true
+str.includes("world"); // false
+str.includes("k"); // false
+
+// String.startsWith(), String.endsWith()
+console.log(str.startsWith("Hello")); // true
+console.log(str.startsWith("World")); // false
+
+console.log(str.endsWith("Javascript")); // true
+console.log(str.startsWith("World")); // false
+```
+
+- **String.indexOf(): 문자열에 어떤 문자열이 포함되어있는지**
+  - **존재하지 않으면 -1을 반환한다. 존재하면 시작지점이나 위치를 반환한다.**
+- **String.includes(): 문자열에 어떤 문자열이 포함되어 있는지 확인**
+  - 대소문자를 구분하며 존재하면 true 존재하지 않으면 false를 반환한다.
+- **String.startsWith(), String.endsWith(): 문자열이 어떤 문자열로 시작하거나 끝나는지 확인**
+
+## 3. 문자열이 같은지 비교
+
+```jsx
+const str1 = "hello";
+const str2 = "hello";
+const str3 = "world";
+
+console.log(str1 === str2); // true
+console.log(str1 === str3); // false
+console.log(str2 === str3); // false
+console.log(str2 !== str3); // true
+
+console.log(str1 == str2); // true
+console.log(str1 == str3); // false
+console.log(str2 == str3); // false
+console.log(str2 != str3); // true
+```
+
+- **동등 연산자를 이용해 문자열이 같은지 비교할 수 있습니다.**
+
+## 4. 문자열 길이 반환
+
+```jsx
+const str3 = "world";
+console.log(str3.length); // 5
+```
+
+- 자바스크립트에서 문자열은 **유사배열객체**이기 때문에 `length` 속성에 접근이 가능합니다.
+
+## 5. 특정 문자의 인덱스 값 찾기
+
+```jsx
+const str = "Hello, World, Javascript";
+str.indexOf("o"); // 4
+str.indexOf("W"); // 7
+```
+
+- 문자열을 0부터 세기 시작해서 위치를 반환함, 존재하지 않으면 -1을 반환
+
+## 6. 문자열을 구분자 기준으로 나누고 합치기
+
+```jsx
+const str = 'Hello, World, Javascript';
+
+console.log(str.split("")); // ["H","e","l","l","o"," "...]
+console.log(str.split(" ")); // ["Hello", "World", "Javascript**"**]
+
+const arr = ["Hello", "World", "Javascript**"**];
+
+console.log(arr.join("")); // HelloWorldJavascript
+console.log(arr.join(" ")); // "Hello", "World", "Javascript**"**
+```
+
+- `split()`: **메서드는 문자열을 특정한 구분자로 나누어 분자열 배열로 반환한다.**
+- `join()`: **메서드는 구분자로 배열 사이에 입력해 합친다.**
+
+## 7. 문자열 대소문자 변환
+
+```jsx
+const str = "Hello, World, Javascript";
+
+// String.toLowerCase();
+str.toLowerCase(); // hello, world, javascript
+
+// String.toUpperCase();
+str.toUpperCase(); // HELLO, WORLD, JAVASCRIPT
+```
+
+- `toLowerCase()` : 모든 문자열을 소문자로 변경한다.
+- `toUpperCase()` : 모든 문자열을 대문자로 변경한다.
+
+## 8. 기존 값을 다른 값으로 치환
+
+```jsx
+let str = "aabbcc";
+
+let str1 = str.replace("a", "d");
+console.log(str1); //dabbcc
+
+let str2 = str.replaceAll("a", "d");
+console.log(str2); //ddbbcc
+```
+
+- `replace()` : 문자열 중 가장 먼저 만난 문자열만 치환합니다.
+- `replaceAll()` : 문자열에 존재하는 모든 문자를 치환합니다.
+
+## 9. 양쪽 끝에서 공백 제거
+
+```jsx
+const str = "  Hello World!  ";
+const trimStr = str.trim();
+
+console.log(trimStr);
+```
+
+- `trim()` : 문자열 양쪽 끝 공백을 제거한다.
+
+## 10. 아스키코드로 변환 혹은 대소 비교
+
+```jsx
+// String.charCodeAt();
+console.log("a".charCodeAt()); // 97
+console.log("h".charCodeAt()); // 104
+console.log("H".charCodeAt()); // 72
+
+// String.fromCharCode(숫자)
+console.log(String.fromCharCode(49)); // "1"
+console.log(String.fromCharCode(32)); // " "
+console.log(String.fromCharCode(0x68)); // "h"
+console.log(String.fromCharCode(0x48)); // "H"
+```
+
+- `charCodeAt()` : 문자열을 아스키코드로 변환합니다.
+- `fromCharCode()` : 특정 아스키코드를 문자열로 변환한다.

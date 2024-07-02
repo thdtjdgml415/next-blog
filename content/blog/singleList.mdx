@@ -3,9 +3,11 @@ title: 단일 연결 리스트
 description: 단일 연결 리스트에 대하여...!
 date: 2024-05-29
 tags: [javascript, algorithm, structure, singleLinkedList]
-series: 자료 구조
+series: 알고리즘
 published: true
 ---
+
+![알고리즘 썸네일](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/algorithm/algorithm.webp)
 
 # 단일 연결 리스트
 
@@ -81,12 +83,12 @@ class SingleyLinkedList {
 
 1. `val`로 들어온 값으로 `Node`를 생성한다. 그리고 `head`와 `tail`에 새로생성한 노드를 할당한다.
 
-   ![단일 연결 리스트 데이터구조1](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/data-structure/singleList/singleList1.webp)
+   ![단일 연결 리스트 데이터구조1](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/algorithm/singleList/singleList1.webp)
 
 2. 나머지 경우에는 이미 `Node`가 존재하고 있기 때문에 새로 만든 노드를 `tail`의 `next` 부분에 추가한다.
 3. 그리고 기존에 있던 tail의 value를 새로운 노드로 변경하고 길이를 증가시킨다.
 
-![단일 연결 리스트 데이터구조2](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/data-structure/singleList/singleList2.webp)
+![단일 연결 리스트 데이터구조2](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/algorithm/singleList/singleList2.webp)
 
 push() 메서드는 자바스크립트에 내장된 메서드와 똑같이 동작한다.
 
@@ -119,11 +121,11 @@ push() 메서드는 자바스크립트에 내장된 메서드와 똑같이 동�
 1. `pop()` 메서드에서 현재 `Node`를 `current` 변수에 할당하고 head가 존재하지 않다면 단일 연결 리스트가 존재하지 않는 것이기 때문에 삭제할 `Node`또한 존재하지 않아 `undefined`를 출력한다.
 2. `pop()` 메서드는 왼쪽에 `head` 노드부터 리스트를 순회하며 `tail`의 **이전** `Node`를 찾는다. 그렇기 때문에 **빅오(N)의 값을 갖는다.**
 
-   ![단일 연결 리스트 데이터구조3](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/data-structure/singleList/singleList3.webp)
+   ![단일 연결 리스트 데이터구조3](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/algorithm/singleList/singleList3.webp)
 
 3. `tail` 이전의 값을 `newTail` 변수에 할당하고 이전에 연결 되어있었던 `tail`의 값을 `null`을 할당에 끊는다.
 
-   ![단일 연결 리스트 데이터구조4](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/data-structure/singleList/singleList4.webp)
+   ![단일 연결 리스트 데이터구조4](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/algorithm/singleList/singleList4.webp)
 
 4. 길이를 1만큼 줄이고 만약 길이가 0이 된다면 **단일 연결 리스트**에 값이 없기 때문에 `head`와 `tail`의 값에 `null`을 할당해 아예 값을 지워버리고 삭제한 `Node`를 반환한다.
 
@@ -149,9 +151,9 @@ shift() {
 1. `head`가 인스턴스에 존재하지 않는다면 단일 연결 리스트에 `Node`가 존재하지 않기 떄문에 삭제할 Node가 존재하지 많아 `undefined`를 출력한다.
 2. 현재 인스턴스에 `head`의 값을 `currentHead` 변수에 할당하고 현재 `head`에는 연결되어있는 다음 `Node`를 할당한다.
 
-   ![단일 연결 리스트 데이터구조5](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/data-structure/singleList/singleList5.webp)
+   ![단일 연결 리스트 데이터구조5](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/algorithm/singleList/singleList5.webp)
 
-   ![단일 연결 리스트 데이터구조6](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/data-structure/singleList/singleList6.webp)
+   ![단일 연결 리스트 데이터구조6](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/algorithm/singleList/singleList6.webp)
 
 3. 삭제하기 때문에 `length`를 한개 줄이고 만약 길이가 0이 된다면 `Node`가 존재하지 않기 때문에 `tail`에 `null`값을 할당한다.
 4. 삭제한 `Node`를 반환한다.
@@ -179,12 +181,12 @@ unshift(val) {
 
 1. 우선 `val`로 연결 시키고자 하는 `value`를 인자로 받는다.
 
-   ![단일 연결 리스트 데이터구조7](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/data-structure/singleList/singleList7.webp)
+   ![단일 연결 리스트 데이터구조7](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/algorithm/singleList/singleList7.webp)
 
 2. 3을 `value`로 갖는 노드를 만들고 `head`가 존재하지 않는다면 링크드 리스트가 존재하지 않기 때문에 `head`와 `tail`에 `Node`를 추가한다.
 3. 그게 아니라면 새로운 `Node.next`에 이전에 `head` 값을 연결하고 `head`에 새로운 `Node`를 추가한다.
 
-   ![단일 연결 리스트 데이터구조8](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/data-structure/singleList/singleList8.webp)
+   ![단일 연결 리스트 데이터구조8](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/algorithm/singleList/singleList8.webp)
 
 ### get
 
@@ -252,13 +254,13 @@ insert(index, val) {
 2. index가 0이라면 `unshift` 메서드와 같은 동작을 하기 때문에 위에서 구현한 `unshift` 메서드를 활용해 추가하고 단일 연결 리스트의 길이와 같다면 맨 뒤에 노드를 추가하는 것이기 때문에 `push` 메서드를 사용해 추가한다.
 3. 원하는 위치에 `Node`를 `insert`하기 위해선 `index-1번째 Node`를 찾고 `index-1번째  Node.next`를 `temp` 변수에 할당한다.
 
-   ![단일 연결 리스트 데이터구조9](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/data-structure/singleList/singleList9.webp)
+   ![단일 연결 리스트 데이터구조9](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/algorithm/singleList/singleList9.webp)
 
 4. `temp`를 새로만든 `Node.next`에 할당하고 `prevNode.next`에 새로운 `Node`를 할당한다.
 
-   ![단일 연결 리스트 데이터구조10](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/data-structure/singleList/singleList10.webp)
+   ![단일 연결 리스트 데이터구조10](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/algorithm/singleList/singleList10.webp)
 
-   ![단일 연결 리스트 데이터구조11](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/data-structure/singleList/singleList11.webp)
+   ![단일 연결 리스트 데이터구조11](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/algorithm/singleList/singleList11.webp)
 
 ### remove
 
@@ -278,11 +280,11 @@ remove(index) {
 1. index이 범위를 인스턴스의 단일 연결 리스트로 한정하고 범위를 벗어나면 undefined를 반환한다.
 2. preNode변수에 index - 1 번째 Node를 get 메서드를 통해 찾아 할당하고 preNode.next의 값을 removed 변수에 할당한다.
 
-   ![단일 연결 리스트 데이터구조12](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/data-structure/singleList/singleList12.webp)
+   ![단일 연결 리스트 데이터구조12](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/algorithm/singleList/singleList12.webp)
 
 3. removed.next에는 index + 1번째 Node가 있기 때문에 prevNode.next에 할당해 연결 시켜준다.
 
-   ![단일 연결 리스트 데이터구조13](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/data-structure/singleList/singleList13.webp)
+   ![단일 연결 리스트 데이터구조13](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/algorithm/singleList/singleList13.webp)
 
 # 결론
 
