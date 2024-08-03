@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
-import { Icons } from "./icons";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Icons } from "./icons";
 
 export function MainNav() {
   const pathname = usePathname();
