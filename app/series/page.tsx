@@ -19,6 +19,10 @@ export default function series() {
       subject: "알고리즘",
       description: "알고리즘에 대해 시리즈로 정리한 내용입니다.",
     },
+    {
+      subject: "docker",
+      description: "docker에 대해 정리한 글 입니다.",
+    },
   ];
 
   const getSeriesPost = groupPostsBySeries(posts);
