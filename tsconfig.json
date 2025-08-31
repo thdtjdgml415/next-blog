@@ -27,7 +27,9 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "lib/gtag.js"
-, "components/GoogleAnalytics.jsx"  ],
+    "lib/gtag.js",
+    "components/GoogleAnalytics.jsx",
+    "components/canvas/snowflake.js"
+  ],
   "exclude": ["node_modules"]
 }

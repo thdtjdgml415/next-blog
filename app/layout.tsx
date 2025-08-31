@@ -33,13 +33,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-pt-[3.5rem]">
+    <html lang="en" className="scroll-pt-[3.5rem]" suppressHydrationWarning>
       <GoogleAnalytics />
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
           fontSans.variable
         )}
+        suppressHydrationWarning
       >
         <Providers>
           <div className="relative flex min-h-dvh flex-col bg-background">
