@@ -85,14 +85,57 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "slide-in-right": {
+          "0%": { transform: "translateX(50px)", opacity: "0" },
+          "100%": { transform: "translateX(0)", opacity: "1" },
+        },
+        "slide-out-right": {
+          "0%": { transform: "translateX(0)", opacity: "1" },
+          "100%": { transform: "translateX(24px)", opacity: "0" },
+        },
+        "fade-in-right": {
+          "0%": { transform: "translateY(50px)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
+        },
+        "slide-in-left": {
+          "0%": { transform: "translateX(-24px)", opacity: "0" },
+          "100%": { transform: "translateX(0)", opacity: "1" },
+        },
+        "slide-out-left": {
+          "0%": { transform: "translateX(0)", opacity: "1" },
+          "100%": { transform: "translateX(-24px)", opacity: "0" },
+        },
+
+        typewriter: {
+          to: { left: "100%" },
+        },
+        blink: {
+          "0%": { opacity: "0" },
+          "0.1%": { opacity: "1" },
+          "50%": { opacity: "1" },
+          "50.1%": { opacity: "0" },
+          "100%": { opacity: "0" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "slide-in-right": "slide-in-right 500ms ease-out forwards",
+        "slide-out-right": "slide-out-right 500ms ease-in forwards",
+        "slide-in-left": "slide-in-left 300ms ease-out forwards",
+        "slide-out-left": "slide-out-left 200ms ease-in forwards",
+        "fade-in-right": "fade-in-right 500ms ease-out forwards",
+        typewriter: "typewriter 2s steps(25) forwards",
+        caret:
+          "typewriter 2s steps(25) forwards, blink 1s steps(1) infinite 2s",
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("@tailwindcss/typography"),
+    require("tailwindcss-animation-delay"),
+  ],
 } satisfies Config;
 
 export default config;

@@ -10,51 +10,69 @@ import { siteConfig } from "@/config/site";
 
 export function MainInto() {
   return (
-    <div className="flex">
-      <Image
+    <div className="flex flex-col gap-4 ">
+      <h1
+        className={cn(
+          "text-xl sm:text-xl md:text-xl lg:text-xl font-medium text-balance",
+          `relative w-[max-content] font-mono
+            motion-safe:before:animate-typewriter
+            motion-safe:after:animate-caret
+            before:absolute before:inset-[-4px] before:bg-background
+            after:absolute after:inset-[-4px] after:w-[0.125em] after:bg-black`
+        )}
+      >
+        어서오세요! 함께 성장하는 개발자 송성희입니다.
+      </h1>
+
+      <p
+        className={cn(
+          "max-w-[42rem] text-start text-muted-foreground sm:text-xl text-balance",
+          `motion-safe:animate-slide-in-right`
+        )}
+      >
+        공유하고 받으며 함께 성장하는 것을 바탕으로 삶을 추구합니다.
+      </p>
+
+      {/* <div className="flex flex-col gap-4 justify-center sm:flex-row">
+        <Link
+          href="/blog"
+          className={cn(buttonVariants({ size: "lg" }), "w-full sm:w-fit")}
+        >
+          View my blog
+        </Link>
+        <Link
+          href={siteConfig.links.github}
+          target="_blank"
+          rel="noreferrer"
+          className={cn(
+            buttonVariants({ variant: "outline", size: "lg" }),
+            "w-full sm:w-fit"
+          )}
+        >
+          Github
+        </Link>
+      </div> */}
+    </div>
+  );
+}
+
+// <div className="flex">
+{
+  /* <Image
         src={mainImage3}
         alt=""
         width={200}
         height={200}
         className="w-0 lg:w-auto"
-      />
-
-      <div className="container flex flex-col gap-4 text-center">
-        <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-balance">
-          Hello I&apos;m Song
-        </h1>
-        <p className="max-w-[42rem] mx-auto text-muted-foreground sm:text-xl text-balance">
-          Welcome to my blog template.. Built using tailwind, shadcn, velit and
-          Next.js 14.
-        </p>
-
-        <div className="flex flex-col gap-4 justify-center sm:flex-row">
-          <Link
-            href="/blog"
-            className={cn(buttonVariants({ size: "lg" }), "w-full sm:w-fit")}
-          >
-            View my blog
-          </Link>
-          <Link
-            href={siteConfig.links.github}
-            target="_blank"
-            rel="noreferrer"
-            className={cn(
-              buttonVariants({ variant: "outline", size: "lg" }),
-              "w-full sm:w-fit"
-            )}
-          >
-            Github
-          </Link>
-        </div>
-      </div>
-      <Image
+      /> */
+}
+{
+  /* <Image
         src={mainImage4}
         alt=""
         width={200}
         height={200}
         className="w-0 lg:w-auto"
-      />
-    </div>
-  );
+      /> */
 }
+// </div>
