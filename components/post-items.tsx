@@ -35,7 +35,7 @@ export function PostItem({
 
   return (
     <article
-      className="flex flex-col gap-2 border-border border-b py-3 px-2 group hover:bg-[#ccc]/30"
+      className="flex flex-col gap-2  py-3 px-2 group hover:bg-[#ccc]/30 rounded-md"
       onClick={() => submitAnalytics(title, "Click", description)}
     >
       <div className="flex justify-between">

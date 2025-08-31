@@ -1,15 +1,9 @@
 import { posts } from "#site/content";
 import { AboutZone } from "@/components/about-zone";
+import { CuboidCanvas } from "@/components/canvas/snowflake.js";
 import { MainInto } from "@/components/main-intro";
 import { PostItem } from "@/components/post-items";
 import { sortPosts } from "@/lib/utils";
-
-export const aboutData = [
-  { key: "1", content: "dsadsda" },
-  { key: "2", content: "dsadsadsdads" },
-  { key: "3", content: "dsadsadsdads23123" },
-  { key: "4", content: "dsadsadsdads4324342" },
-];
 
 export default function Home() {
   const latestPosts = sortPosts(posts).slice(0, 5);
@@ -20,20 +14,7 @@ export default function Home() {
         <MainInto />
       </section>
       {/* <section className="container max-w-2xl">
-        <div className="flex justify-between flex-wrap ">
-          {aboutData.map((data, index) => {
-            const delay = index * 100;
-            return (
-              <div
-                key={data.key}
-                className={`motion-safe:animate-slide-in-right delay-${delay}`}
-                style={{ transitionDelay: `${index * 100}ms` }}
-              >
-                <AboutZone content={data.content} />
-              </div>
-            );
-          })}
-        </div>
+        <AboutZone />
       </section> */}
       <section className="container max-w-2xl py-6 lg:py-10 flex flex-col space-y-6">
         <h2 className="text-xl font-medium text-left">Recent</h2>
@@ -54,6 +35,9 @@ export default function Home() {
             </li>
           ))}
         </ul>
+      </section>
+      <section className="container max-w-2xl w-full py-6 lg:py-10">
+        <CuboidCanvas />
       </section>
     </div>
   );

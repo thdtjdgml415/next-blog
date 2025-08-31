@@ -26,11 +26,12 @@ export function MainInto() {
 
       <p
         className={cn(
-          "max-w-[42rem] text-start text-muted-foreground sm:text-xl text-balance",
+          "max-w-[48rem] text-start text-muted-foreground sm:text-xl ",
           `motion-safe:animate-slide-in-right`
         )}
       >
-        공유하고 받으며 함께 성장하는 것을 바탕으로 삶을 추구합니다.
+        공유하고 받으며 함께 성장하는 것을 바탕으로 삶을 추구합니다. 건강한
+        영향에 기여하는 사람을 추구합니다.
       </p>
 
       {/* <div className="flex flex-col gap-4 justify-center sm:flex-row">
