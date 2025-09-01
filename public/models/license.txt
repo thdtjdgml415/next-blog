@@ -1,0 +1,11 @@
+Model Information:
+* title:	Cartoon tree
+* source:	https://sketchfab.com/3d-models/cartoon-tree-2dccab1ecff04d7e8af9ad43b2bff0d2
+* author:	PolyGuru (https://sketchfab.com/PolyGuru)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Cartoon tree" (https://sketchfab.com/3d-models/cartoon-tree-2dccab1ecff04d7e8af9ad43b2bff0d2) by PolyGuru (https://sketchfab.com/PolyGuru) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

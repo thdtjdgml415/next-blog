@@ -23,8 +23,8 @@ export const CuboidCanvas = () => {
     const setUpCanvas = () => {
       snowflakes = [];
       const snowflakeCount = 600;
-      // 캔버스 크기 설정
 
+      // 캔버스 크기 설정
       const rect = canvas.getBoundingClientRect();
       const dpr = window.devicePixelRatio || 1;
       canvas.width = rect.width * dpr;
@@ -45,7 +45,7 @@ export const CuboidCanvas = () => {
     };
     const draw = () => {
       // 캔버스 초기화(테마 별 변경사항 적용)
-      ctx.fillStyle = theme === "dark" ? "#0C0E22" : "#FFFFFF";
+      ctx.fillStyle = theme === "dark" ? "#020817" : "#FFFFFF";
 
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -130,7 +130,7 @@ export const CuboidCanvas = () => {
       ref={canvasRef}
       onMouseMove={handleOnMouseCanvas}
       onMouseLeave={handleOnMouseLeaveCanvas}
-      className={cn(`w-full bg-transparent rounded-lg shadow-xl`)}
+      className={cn(`w-full bg-background rounded-lg shadow-xl`)}
     />
   );
 };

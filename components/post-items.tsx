@@ -35,43 +35,45 @@ export function PostItem({
 
   return (
     <article
-      className="flex flex-col gap-2  py-3 px-2 group hover:bg-[#ccc]/30 rounded-md"
+      className="flex flex-col gap-2 py-3 px-2 group/item hover:bg-[#ccc]/30 rounded-md transition-all duration-200 group-hover/list:opacity-50 hover:!opacity-100"
       onClick={() => submitAnalytics(title, "Click", description)}
     >
-      <div className="flex justify-between">
-        <div>
-          <h2 className="text-md font-bold  mb-2 group-hover:text-ST_postive transition-all">
-            <Link href={"/" + slug}>{title}</Link>
-          </h2>
-          <div className="flex justify-between items-center mb-1">
-            <dl>
-              <dt className="sr-only">Published On</dt>
-              <dd className="text-xs sm:text-xs font-medium flex items-center gap-1">
-                <Calendar className="h-4 w-4" />
-                <time dateTime="date">{formatDate(date)}</time>
-              </dd>
-            </dl>
-          </div>
+      <Link href={"/" + slug}>
+        <div className="flex justify-between">
+          <div>
+            <h2 className="text-md font-bold mb-2 group-hover/item:text-ST_postive group-hover/item:scale-105 transition-all duration-300">
+              {title}
+            </h2>
+            <div className="flex justify-between items-center mb-1">
+              <dl>
+                <dt className="sr-only">Published On</dt>
+                <dd className="text-xs sm:text-xs font-medium flex items-center gap-1">
+                  <Calendar className="h-4 w-4" />
+                  <time dateTime={date}>{formatDate(date)}</time>
+                </dd>
+              </dl>
+            </div>
 
-          <div className="text-sm text-muted-foreground group-hover:text-ST_postive">
-            {description}
+            <div className="text-sm text-muted-foreground group-hover/item:text-ST_postive">
+              {description}
+            </div>
           </div>
+          {thumbnail ? (
+            <Image
+              src={thumbnail}
+              alt="블로그 썸네일"
+              width={75}
+              height={75}
+              className="object-contain "
+            />
+          ) : null}
         </div>
-        {thumbnail ? (
-          <Image
-            src={thumbnail}
-            alt="블로그 썸네일"
-            width={75}
-            height={75}
-            className="object-contain "
-          />
-        ) : null}
-      </div>
-      <div className="flex gap-2 overflow-auto">
-        {/* {tags?.map((tag) => {
+        <div className="flex gap-2 overflow-auto">
+          {/* {tags?.map((tag) => {
           return <Tag tag={tag} key={tag} />;
         })} */}
-      </div>
+        </div>
+      </Link>
     </article>
   );
 }

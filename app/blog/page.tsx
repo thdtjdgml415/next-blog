@@ -1,4 +1,5 @@
 import { posts } from "#site/content";
+import { FallingTag } from "@/components/canvas/falling-tag";
 import { PostItem } from "@/components/post-items";
 import { QueryPagination } from "@/components/query-pagination";
 import { Tag } from "@/components/tag";
@@ -45,17 +46,18 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           <CardHeader>
             <CardTitle>Tags</CardTitle>
           </CardHeader>
-          <CardContent className="flex flex-wrap gap-2">
-            {sortedTags?.map((tag) => (
+          <CardContent className="w-full flex flex-wrap gap-2 !p-0">
+            <FallingTag tags={sortedTags} />
+            {/* {sortedTags?.map((tag) => (
               <Tag tag={tag} key={tag} count={tags[tag]} />
-            ))}
+            ))} */}
           </CardContent>
         </Card>
         <div className="col-span-12 col-start-1 sm:col-span-8">
           <QueryPagination totalPages={totalPages} className="justify-end" />
           <hr className="mt-8" />
           {displayPosts?.length > 0 ? (
-            <ul className="flex flex-col">
+            <ul className="flex flex-col group/list">
               {displayPosts.map((post) => {
                 const { slug, title, description, date, thumbnail, tags } =
                   post;

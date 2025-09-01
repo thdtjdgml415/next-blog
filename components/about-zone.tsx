@@ -1,3 +1,7 @@
+"use client";
+import Image from "next/image";
+import { CuboidCanvas } from "./canvas/snowflake";
+
 export const aboutData = [
   { key: "1", content: "dsadsda" },
   { key: "2", content: "dsadsadsdads" },
@@ -7,19 +11,17 @@ export const aboutData = [
 
 export const AboutZone = () => {
   return (
-    <div className=" flex flex-wrap justify-between">
-      {aboutData.map((data, index) => {
-        const delay = index * 100;
-        return (
-          <div
-            key={data.key}
-            className={`motion-safe:animate-slide-in-right delay-${delay}`}
-            style={{ transitionDelay: `${index * 100}ms` }}
-          >
-            ss
-          </div>
-        );
-      })}
+    <div className="relative w-full h-full">
+      {/* <Image
+        src={"/static/tree.png"}
+        alt="tree"
+        width={100}
+        height={100}
+        className="w-full h-full"
+      /> */}
+      <div className="absolute z-auto">
+        <CuboidCanvas />
+      </div>
     </div>
   );
 };

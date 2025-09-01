@@ -29,7 +29,9 @@
     ".next/types/**/*.ts",
     "lib/gtag.js",
     "components/GoogleAnalytics.jsx",
-    "components/canvas/snowflake.js"
+    "components/canvas/snowflake.js",
+    "components/canvas/tree-model.jsx",
+    "components/canvas/falling-tag.jsx"
   ],
   "exclude": ["node_modules"]
 }
