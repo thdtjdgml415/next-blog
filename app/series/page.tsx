@@ -42,16 +42,16 @@ export default function series() {
 
           return (
             <React.Fragment key={seriesName}>
-              <div className="flex flex-wrap justify-between">
+              <div className="w-full flex flex-wrap justify-between">
                 <div className="mb-10">
                   <h2 className="text-3xl mb-2">{seriesName}</h2>
                   <p>{description}</p>
                 </div>
-                <div>
+                <div className="w-full">
                   {posts.map((post: Post) => {
                     const { title, description, slugAsParams } = post;
                     return (
-                      <li key={post.slug} className="w-96">
+                      <li key={post.slug} className="w-full">
                         <SeriesItem
                           title={title}
                           description={description}

@@ -13,7 +13,7 @@ export function MainInto() {
     <div className="flex flex-col gap-4 ">
       <h1
         className={cn(
-          "text-xl sm:text-xl md:text-xl lg:text-xl font-medium text-balance",
+          "text-xl font-medium text-balance",
           `relative w-[max-content] font-mono
             motion-safe:before:animate-typewriter
             motion-safe:after:animate-caret
@@ -21,7 +21,7 @@ export function MainInto() {
             after:absolute after:inset-[-4px] after:w-[0.125em] after:bg-black`
         )}
       >
-        어서오세요! 함께 성장하는 개발자 송성희입니다.
+        hello, I&apos;m song
       </h1>
 
       <p

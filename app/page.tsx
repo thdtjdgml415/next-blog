@@ -1,8 +1,7 @@
 import { posts } from "#site/content";
-import { AboutZone } from "@/components/about-zone";
-import { CuboidCanvas } from "@/components/canvas/snowflake.js";
 import { MainInto } from "@/components/main-intro";
 import { PostItem } from "@/components/post-items";
+
 import { sortPosts } from "@/lib/utils";
 
 export default function Home() {
@@ -10,19 +9,19 @@ export default function Home() {
 
   return (
     <div className="container">
-      <section className="container max-w-2xl space-y-6 pb-4 pt-10 ">
+      <section className="w-full mx-auto lg:px-[2rem] max-w-2xl space-y-6  pt-10 ">
         <MainInto />
       </section>
-      {/* <section className="container max-w-2xl">
+      {/* <section className="container max-w-2xl h-[304px]">
         <AboutZone />
       </section> */}
-      <section className="container max-w-2xl py-6 lg:py-10 flex flex-col space-y-6">
+      <section className="w-full mx-auto lg:px-[2rem] max-w-2xl py-6 lg:py-10 flex flex-col space-y-6">
         <h2 className="text-xl font-medium text-left">Recent</h2>
-        <ul className="flex flex-col">
+        <ul className="flex flex-col group/list">
           {latestPosts.map((post) => (
             <li
               key={post.slug}
-              className="first:border-t first:border-border motion-safe:animate-slide-in-right "
+              className=" motion-safe:animate-slide-in-right "
             >
               <PostItem
                 slug={post.slug}
@@ -35,9 +34,6 @@ export default function Home() {
             </li>
           ))}
         </ul>
-      </section>
-      <section className="container max-w-2xl w-full py-6 lg:py-10">
-        <CuboidCanvas />
       </section>
     </div>
   );
