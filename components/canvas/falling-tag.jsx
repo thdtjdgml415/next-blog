@@ -19,7 +19,7 @@ export const FallingTag = ({ tags }) => {
     const engine = Engine.create({
       gravity: { y: 0.6 },
       positionIterations: 10,
-      velocityIterations: 100,
+      velocityIterations: 10,
     });
     const world = engine.world;
     engineRef.current = engine;
@@ -32,35 +32,35 @@ export const FallingTag = ({ tags }) => {
     canvas.width = containerWidth;
     canvas.height = containerHeight;
 
-    const columns = 5; // Number of columns in the grid
-    const tagSpacing = 10; // Spacing between tags
+    const columns = 5;
+    const tagSpacing = 10;
     const tagBodies = tags.map((label, index) => {
       const textMetrics = ctx.measureText(label);
+
       const width = textMetrics.width + 20;
-      const height = 32;
+      const height = textMetrics.width;
 
       const column = index % columns;
       const row = Math.floor(index / columns);
 
       const x =
         (containerWidth / columns) * column + containerWidth / (columns * 2);
-      const y = -row * (height + tagSpacing) - 100; // Start above the canvas
+      const y = -row * (height + tagSpacing) - 100;
 
       const body = Bodies.rectangle(x, y, width, height, {
         restitution: 0.2,
-        friction: 0.8,
-        frictionStatic: 0.5,
+        friction: 0.1,
+        frictionStatic: 0.2,
         render: {
           fillStyle: "#5c67f2",
           strokeStyle: "#020817",
           lineWidth: 1,
-          sprite: 1,
         },
       });
+
       body.label = label;
       return body;
     });
-
     const ground = Bodies.rectangle(
       containerWidth / 2,
       containerHeight,
@@ -82,11 +82,11 @@ export const FallingTag = ({ tags }) => {
       containerHeight,
       { isStatic: true, render: { visible: false }, label: "rightWall" }
     );
-    console.log(ground, leftWall, rightWall);
+
     World.add(world, [...tagBodies, ground, leftWall, rightWall]);
 
-    // Add mouse control
     const mouse = Mouse.create(canvasRef.current);
+    console.log(mouse);
     const mouseConstraint = MouseConstraint.create(engine, {
       mouse: mouse,
       constraint: {
@@ -121,7 +121,7 @@ export const FallingTag = ({ tags }) => {
           ctx.stroke();
 
           ctx.fillStyle = "#ffffff";
-          ctx.font = '14px "Noto Sans KR"';
+          ctx.font = "14px";
           ctx.textAlign = "center";
           ctx.textBaseline = "middle";
           ctx.fontStyle = "bold";
@@ -161,6 +161,7 @@ export const FallingTag = ({ tags }) => {
       Runner.stop(runnerRef.current);
       World.clear(engineRef.current.world, false);
       Engine.clear(engineRef.current);
+      Mouse.clearSourceEvents(mouse);
       window.removeEventListener("resize", handleResize);
     };
   }, [tags]);
@@ -169,7 +170,7 @@ export const FallingTag = ({ tags }) => {
     <section
       id="contact"
       ref={containerRef}
-      className="relative py-20 md:py-32 w-full h-full min-h-screen flex flex-col justify-center items-center overflow-hidden"
+      className="relative py-20 md:py-32 w-full h-full min-h-[500px] flex flex-col justify-center items-center overflow-hidden"
     >
       <div className="w-[300px] h-full"></div>
 

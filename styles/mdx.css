@@ -37,3 +37,16 @@
 .subheading-anchor {
   @apply no-underline hover:underline;
 }
+
+aside {
+  background: var(--brand-color);
+  box-sizing: border-box;
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-weight: 600;
+  border: 1px solid #000000;
+}
+
+aside > p {
+  color: #000000;
+}

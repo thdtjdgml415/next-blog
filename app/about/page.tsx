@@ -1,8 +1,10 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { siteConfig } from "@/config/site";
-import { Metadata } from "next";
-import MDXcomponent from "@/components/mdx-components";
 import { posts } from "#site/content";
+import { CareerSection } from "@/components/about/CareerSection";
+import { HeroSection } from "@/components/about/HeroSection";
+import { ProjectSection } from "@/components/about/ProjectSection";
+import { SideProjectSection } from "@/components/about/SideProjectSection";
+import { SkillsSection } from "@/components/about/SkillSection";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "About me",
@@ -12,7 +14,20 @@ export const metadata: Metadata = {
 export default async function AboutPage() {
   const aboutPosts = posts.filter((post) => post.tags?.includes("about"));
   return (
-    <div className="container max-w-6xl py-6 lg:py-10">
+    <>
+      <HeroSection />
+      <div className="container max-w-6xl">
+        <CareerSection />
+        <ProjectSection />
+        <SideProjectSection />
+        {/* <SkillsSection /> */}
+      </div>
+    </>
+  );
+}
+
+{
+  /* <div className="container max-w-6xl py-6 lg:py-10">
       <div className="flex flex-col item-start gap-4 md:flex-row md:justify-between">
         <div className="flex-1 space-x-4">
           <h1 className="inline-block font-black text-4xl lg:text-5xl">
@@ -21,6 +36,9 @@ export default async function AboutPage() {
         </div>
       </div>
       <hr className="my-8" />
+      <div>
+
+      </div>
       <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
         <div className="min-w-48 max-w-48 flex flex-col gap-2">
           <Avatar className="w-48 h-48">
@@ -72,11 +90,10 @@ export default async function AboutPage() {
       {aboutPosts.map((post) => (
         <article
           key={post.slug}
-          className="container py-6 dark:prose-invert prose max-w-6xl mx-auto no-underline"
+          className="container py-6 dark:prose-invert prose max-w-6xl mx-auto no-underline motion-safe:animate-slide-in-right"
         >
           <MDXcomponent code={post.body} />
         </article>
       ))}
-    </div>
-  );
+    </div> */
 }
