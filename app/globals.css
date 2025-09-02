@@ -13,12 +13,16 @@ aside {
 
 /* markdown 스타일링 */
 
+h1 {
+  margin: 30px 0 10px 0 !important;
+}
+
 a {
   text-decoration: none !important;
 }
 
 thead tr th {
-  background: #cccccc;
+  background: var(--brand-color) !important;
   text-align: center;
   line-height: auto;
   border: 1px solid #000000;
@@ -29,7 +33,7 @@ tbody tr td:first-child {
 }
 
 tbody tr td {
-  border: 1px solid #000000;
+  border: 1px solid var(--brand-color);
 }
 
 code {
@@ -128,6 +132,24 @@ code::before {
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .card-dynamic-size {
+    @apply absolute top-0 left-0 w-full h-full;
+  }
+
+  .card-front-back {
+    @apply flex flex-col px-6 py-10  rounded-[20px] shadow-md;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+}
+
+@layer utilities {
+  .rotate-y-180 {
+    transform: rotateY(180deg);
   }
 }
 

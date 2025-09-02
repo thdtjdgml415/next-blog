@@ -20,7 +20,7 @@ export default function series() {
       description: "알고리즘에 대해 시리즈로 정리한 내용입니다.",
     },
     {
-      subject: "docker",
+      subject: "Docker",
       description: "docker에 대해 정리한 글 입니다.",
     },
   ];
@@ -30,8 +30,8 @@ export default function series() {
   return (
     <div className="container max-w-4xl py-6 lg:py-10">
       <h1 className="text-4xl font-extrabold mb-10">Series</h1>
-
-      <ul>
+      <hr className="mb-10" />
+      <ul className="motion-safe:animate-slide-in-right">
         {Object.entries(getSeriesPost).map(([seriesName, posts]) => {
           const seriesInfo = seriesDescriptions.find(
             (el) => el.subject === seriesName
@@ -42,7 +42,7 @@ export default function series() {
 
           return (
             <React.Fragment key={seriesName}>
-              <div className="w-full flex flex-wrap justify-between">
+              <div className="w-full flex flex-wrap justify-between mb-10">
                 <div className="mb-10">
                   <h2 className="text-3xl mb-2">{seriesName}</h2>
                   <p>{description}</p>
@@ -62,7 +62,6 @@ export default function series() {
                   })}
                 </div>
               </div>
-              <hr className="my-10 h-[2px] bg-[#000000]" />
             </React.Fragment>
           );
         })}

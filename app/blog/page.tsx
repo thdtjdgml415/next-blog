@@ -46,18 +46,15 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           <CardHeader>
             <CardTitle>Tags</CardTitle>
           </CardHeader>
-          <CardContent className="w-full flex flex-wrap gap-2 !p-0">
+          <CardContent className="w-full h-[500px] max-h-[500px] flex flex-wrap gap-2 !p-0">
             <FallingTag tags={sortedTags} />
-            {/* {sortedTags?.map((tag) => (
-              <Tag tag={tag} key={tag} count={tags[tag]} />
-            ))} */}
           </CardContent>
         </Card>
         <div className="col-span-12 col-start-1 sm:col-span-8">
           <QueryPagination totalPages={totalPages} className="justify-end" />
           <hr className="mt-8" />
           {displayPosts?.length > 0 ? (
-            <ul className="flex flex-col group/list">
+            <ul className="flex flex-col group/list motion-safe:animate-slide-in-right">
               {displayPosts.map((post) => {
                 const { slug, title, description, date, thumbnail, tags } =
                   post;

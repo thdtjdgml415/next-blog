@@ -12,13 +12,6 @@ export const aboutData = [
 export const AboutZone = () => {
   return (
     <div className="relative w-full h-full">
-      {/* <Image
-        src={"/static/tree.png"}
-        alt="tree"
-        width={100}
-        height={100}
-        className="w-full h-full"
-      /> */}
       <div className="absolute z-auto">
         <CuboidCanvas />
       </div>
