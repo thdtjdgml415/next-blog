@@ -80,9 +80,9 @@ export function SideProjectSection() {
             key={index}
             className="side-project-card block"
           >
-            <Card className="bg-gray-900 border-gray-800 h-full hover:border-cyan-400 transition-colors duration-300">
+            <Card className="bg-primary-foreground border-gray-800 h-full hover:border-[var(--brand-color)] transition-colors duration-300">
               <CardHeader>
-                <CardTitle className="text-lg text-cyan-400">
+                <CardTitle className="text-lg text-[var(--brand-color)]">
                   {project.title}
                 </CardTitle>
               </CardHeader>
