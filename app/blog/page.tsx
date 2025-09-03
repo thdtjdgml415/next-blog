@@ -1,6 +1,7 @@
 import { posts } from "#site/content";
 import { PostItem } from "@/components/post-items";
 import { QueryPagination } from "@/components/query-pagination";
+import { Skeleton } from "@/components/ui/skeleton";
 import { sortPosts } from "@/lib/utils";
 import { Metadata } from "next";
 
@@ -33,8 +34,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
       {displayPosts?.length > 0 ? (
         <ul className="flex flex-col group/list motion-safe:animate-slide-in-right">
           {displayPosts.map((post) => {
-            const { slug, title, description, date, thumbnail, tags } =
-              post;
+            const { slug, title, description, date, thumbnail, tags } = post;
             return (
               <li key={slug}>
                 <PostItem
@@ -50,7 +50,13 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           })}
         </ul>
       ) : (
-        <p>nothing</p>
+        <>
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+        </>
       )}
     </>
   );
