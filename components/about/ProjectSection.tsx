@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -24,6 +25,7 @@ const projectData = [
       "next-intl을 활용한 다국어(3개) 지원",
       "RTK Query 미들웨어로 공통 에러 처리 및 토큰 관리 시스템 구축",
     ],
+    src: ["/projects/produtivity.png"],
   },
   {
     title: "Davis (PMS 연동 LLM)",
@@ -37,6 +39,7 @@ const projectData = [
       "SSE를 활용하여 AI 답변 단방향 실시간 통신 구현",
       "Azure-pipeline 및 Docker를 활용한 배포 자동화",
     ],
+    src: ["/projects/produtivity.png"],
   },
   {
     title: "a015 (웹 문자/ARS 서비스)",
@@ -51,6 +54,7 @@ const projectData = [
       "React-Hook-Form으로 동적 폼 및 유효성 검사 최적화",
       "GitHub Projects 도입으로 이슈 관리 및 업무 프로세스 개선",
     ],
+    src: ["/projects/arreo.png"],
   },
   {
     title: "VOC (통합 고객 민원 게시판)",
@@ -64,6 +68,7 @@ const projectData = [
       "Recoil을 활용한 전역 상태 관리 구조 설계",
       "Nginx를 활용한 배포 환경 설정 및 운영",
     ],
+    src: ["/projects/produtivity.png"],
   },
 ];
 
@@ -110,10 +115,10 @@ export function ProjectSection() {
         {projectData.map((project, index) => (
           <div key={index} className="project-card group [perspective:1100px]">
             <div className="relative w-[500px] h-[600px] group-hover:rotate-y-180 [transform-style:preserve-3d] duration-500">
-              <Card className="z-10 card-dynamic-size card-front-back shadow-none [transform-style:preserve-3d]">
+              <Card className="bg-primary-foreground z-10 card-dynamic-size card-front-back shadow-none [transform-style:preserve-3d]">
                 <CardHeader>
                   <div className="flex justify-between items-center">
-                    <CardTitle className="text-xl text-cyan-400">
+                    <CardTitle className="text-xl text-[var(--brand-color)]">
                       {project.title}
                     </CardTitle>
                     <Badge variant="secondary">{project.company}</Badge>
@@ -127,7 +132,9 @@ export function ProjectSection() {
                   <ul className="space-y-2 text-gray-300">
                     {project.tasks.map((task, i) => (
                       <li key={i} className="flex items-start">
-                        <span className="text-cyan-400 mr-2 shrink-0">✓</span>
+                        <span className="text-[var(--brand-color)] mr-2 shrink-0">
+                          ✓
+                        </span>
                         <span>{task}</span>
                       </li>
                     ))}
@@ -135,19 +142,24 @@ export function ProjectSection() {
                 </CardContent>
               </Card>
 
-              <Card className="card-dynamic-size card-front-back rotate-y-180 shadow-none [transform-style:preserve-3d]">
+              <Card className="bg-primary-foreground card-dynamic-size card-front-back rotate-y-180 shadow-none [transform-style:preserve-3d]">
                 <CardHeader>
                   <div className="flex justify-between items-center">
-                    <CardTitle className="text-xl text-cyan-400">
-                      뒷면
+                    <CardTitle className="text-xl text-[var(--brand-color)]">
+                      이미지
                     </CardTitle>
                     <Badge variant="secondary">{project.company}</Badge>
                   </div>
                   <p className="text-sm text-gray-500">{project.period}</p>
                 </CardHeader>
                 <CardContent className="flex-grow flex flex-col">
-                  <p className="text-gray-400 mb-4 flex-grow">뒷면</p>
-                  <ul className="space-y-2 text-gray-300">뒷면</ul>
+                  <Image
+                    src={project.src[0]}
+                    alt="project"
+                    width={300}
+                    height={400}
+                    sizes="200px"
+                  />
                 </CardContent>
               </Card>
             </div>

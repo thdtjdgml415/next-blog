@@ -78,12 +78,12 @@ export function CareerSection() {
       <div className="relative pl-6 border-l-2 border-gray-700 space-y-12">
         {careerData.map((item, index) => (
           <div key={index} className="career-card relative">
-            <div className="absolute -left-[34px] top-1.5 w-4 h-4 bg-cyan-400 rounded-full border-4 border-gray-950"></div>
-            <Card className="bg-gray-900 border-gray-800 shadow-lg shadow-cyan-500/10">
+            <div className="absolute -left-[34px] top-1.5 w-4 h-4 bg-[var(--brand-color)] rounded-full border-4 border-gray-950"></div>
+            <Card className="bg-primary-foreground border-gray-800 shadow-lg shadow-cyan-500/10">
               <CardHeader>
                 <div className="flex justify-between items-start">
                   <div>
-                    <CardTitle className="text-2xl text-cyan-400">
+                    <CardTitle className="text-2xl text-[var(--brand-color)]">
                       {item.company}
                     </CardTitle>
                     <CardDescription className="text-gray-400 mt-1">
