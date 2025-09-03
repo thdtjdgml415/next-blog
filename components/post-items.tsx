@@ -34,11 +34,11 @@ export function PostItem({
   };
 
   return (
-    <article
-      className="flex flex-col gap-2 py-3 px-2 group/item hover:bg-[#ccc]/30 rounded-md transition-all duration-200 group-hover/list:opacity-50 hover:!opacity-100"
+    <Link
+      href={"/" + slug}
       onClick={() => submitAnalytics(title, "Click", description)}
     >
-      <Link href={"/" + slug}>
+      <article className="flex flex-col gap-2 py-3 px-2 group/item hover:bg-[#ccc]/30 rounded-md transition-all duration-200 group-hover/list:opacity-50 hover:!opacity-100">
         <div className="flex justify-between">
           <div>
             <h2 className="text-md font-bold mb-2 group-hover/item:text-ST_postive group-hover/item:scale-105 transition-all duration-300">
@@ -68,7 +68,7 @@ export function PostItem({
             />
           ) : null}
         </div>
-      </Link>
-    </article>
+      </article>
+    </Link>
   );
 }
