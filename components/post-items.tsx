@@ -68,11 +68,6 @@ export function PostItem({
             />
           ) : null}
         </div>
-        <div className="flex gap-2 overflow-auto">
-          {/* {tags?.map((tag) => {
-          return <Tag tag={tag} key={tag} />;
-        })} */}
-        </div>
       </Link>
     </article>
   );
