@@ -113,8 +113,11 @@ export function ProjectSection() {
       <h2 className="text-4xl font-bold text-center mb-12">주요 프로젝트</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {projectData.map((project, index) => (
-          <div key={index} className="project-card group [perspective:1100px]">
-            <div className="relative w-[500px] h-[600px] group-hover:rotate-y-180 [transform-style:preserve-3d] duration-500">
+          <div
+            key={index}
+            className="project-card group [perspective:1100px] w-full min-h-[600px]"
+          >
+            <div className="relative w-full h-full group-hover:rotate-y-180 [transform-style:preserve-3d] duration-500">
               <Card className="bg-primary-foreground z-10 card-dynamic-size card-front-back shadow-none [transform-style:preserve-3d]">
                 <CardHeader>
                   <div className="flex justify-between items-center">
@@ -142,7 +145,7 @@ export function ProjectSection() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-primary-foreground card-dynamic-size card-front-back rotate-y-180 shadow-none [transform-style:preserve-3d]">
+              <Card className="bg-primary-foreground card-dynamic-size card-front-back rotate-y-180 shadow-none [transform-style-preserve-3d]">
                 <CardHeader>
                   <div className="flex justify-between items-center">
                     <CardTitle className="text-xl text-[var(--brand-color)]">

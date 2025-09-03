@@ -23,6 +23,10 @@ export default function series() {
       subject: "Docker",
       description: "docker에 대해 정리한 글 입니다.",
     },
+    {
+      subject: "CS",
+      description: "CS에 대해 정리한 글 입니다.",
+    },
   ];
 
   const getSeriesPost = groupPostsBySeries(posts);

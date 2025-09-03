@@ -1,0 +1,99 @@
+---
+title: ram과 rom
+description: 메모리..?
+date: 2025-09-03
+tags: [computer, cs]
+series: CS
+published: true
+---
+
+<aside>
+📌 메인 메모리에는 RAM과 ROM이 있지만, “메인 메모리”라는 용어는 RAM을 지칭하는 경우가 많음
+
+</aside>
+
+## RAM (Random Access Memory)
+
+RAM은 실행해야 하는 데이터를 저장하고 있는 저장 장치이다.
+
+- 휘발성 저장장치 - 이는 RAM의 가장 중요한 특징으로 전원이 끊기면 데이터도 사라진다.
+- 크기와 성능 - 많은 프로그램을 동시에, 빠르게 실행하는 데에 유리(다다익램)
+
+## RAM의 종류
+
+- DRAM
+- SRAM
+- SDRAM
+- DDR SDRAM(DDR2SDRAM)
+
+### DRAM (Dynamic RAM)
+
+시간이 지나면 점차 저장된 데이터가 사라지는 RAM
+
+- 메인 메모리에서 주로 사용되는 RAM
+- 저장된 내용을 충전해야하기 떄문에 재충전이 필요
+- 대용량화 하기 쉽다.
+- 집적도가 높다. (데이터가 압축되기 쉬움)
+- 주기억장치(RAM에서 사용)
+
+### SRAM(Static RAM)
+
+시간이 지나도 저장된 데이터가 사라지지 않는 RAM
+
+- 캐시 메모리에서 주로 사용되는 RAM
+- 비교적 대용량화가 힘들다.
+- 재충전이 필요없다.
+- 전원이 끊기면 데이터가 사라지기 때문에 휘발성은 똑같음
+- 집적도가 낮다
+- 캐시메모리에서 사용
+
+### SDRAM(Synchromous Dynamic RAM)
+
+클럭과 동기화된 RAM으로 클럭의 타이밍에 맞춰 CPU와 정보를 주고받을 수 있는 RAM
+
+### DDR SDRAM(Double DAta Rate SDRAM)
+
+대역폭을 넓혀 속도를 높인 RAM
+
+기존에 `SDRAM`은 한가지의 정보만 주고받을 수 있었는데 `DDRSDRAM`은 `SDRAM`보다 대역폭이 두 배 넓다.
+
+- DDR2 SDRAM - DDRSDRAM보다 대역폭이 두 배 넓은 SDRAM
+- DDR3 SDRAM - DDR2SDRAM보다 대역폭이 두 배 넓은 SDRAM
+
+## ROM (Read Only Memory)
+
+- 비석과도 같은 저장장치
+- 냉장고, 전자레인지, 게임기, 텔레비전과 같은 가전제품에서도 많이 사용
+
+## ROM의 종류
+
+- Mask Rom
+- PROM
+- EPROM
+- 플래시 메모리
+
+### Mask Rom
+
+가장 기본적인 형태의 ROM
+
+저장할 내용을 미리 기록 (과거에 사용했던 ROM의 형태)
+
+### PROM(Programmable ROM)
+
+데이터를 한 번 새길 수 있는 ROM
+
+### EPROM(Erasable PROM)
+
+지우고 다시 저장 가능한 PROM
+
+### 플래시 메모리
+
+EEPROM의 발전된, 저렴한 형태, 반도체 기반이 저장장치
+
+메인 메모리 범주에 속한다기보다는 범용성이 넓은 저장장치
+
+오늘 날 가전제품에서 활용
+
+ex) USB Memory, SD카드, SSD
+
+![data](https://raw.githubusercontent.com/thdtjdgml415/next-blog/main/assets/img/cs/ram-rom/ram-rom.webp)
