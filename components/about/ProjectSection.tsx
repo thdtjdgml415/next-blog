@@ -11,7 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const projectData = [
   {
-    title: "PMS (프로젝트 관리 시스템)",
+    title: "PIMS (프로젝트 관리 시스템)",
     company: "피엠에스엘플러스",
     period: "2024.09 ~ 2025.07",
     description:
@@ -31,7 +31,7 @@ const projectData = [
     title: "Davis (PMS 연동 LLM)",
     company: "피엠에스엘플러스",
     period: "2025.03 ~ 2025.09",
-    description: "PMS+ 데이터를 생성형 LLM으로 쉽게 관리하는 서비스입니다.",
+    description: "PIMS 데이터를 생성형 LLM으로 쉽게 관리하는 서비스입니다.",
     tasks: [
       "커스텀 훅 패턴으로 뷰와 로직 분리",
       "SSR과 서버 컴포넌트를 적극 활용하여 초기 로딩 속도 개선",
